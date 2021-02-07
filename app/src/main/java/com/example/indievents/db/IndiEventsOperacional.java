@@ -2,11 +2,15 @@ package com.example.indievents.db;
 
 import android.content.Context;
 
+import com.example.indievents.pojo.Event;
+import com.example.indievents.pojo.EventStudio;
+import com.example.indievents.pojo.EventUser;
 import com.example.indievents.pojo.Game;
 import com.example.indievents.pojo.Studio;
 import com.example.indievents.pojo.User;
 
 import java.io.Serializable;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 public class IndiEventsOperacional implements Serializable {
@@ -81,6 +85,19 @@ public class IndiEventsOperacional implements Serializable {
     public ArrayList<User> getStudios(){
         return miBD.getStudioDAO().getAll();
     }
+    // Operacion getUsers: Obtiene un ArrayList de los users de un studio que recibe como parámetro
+    public ArrayList<Event> getEvents() throws ParseException {
+        return miBD.getEventDAO().getAll();
+    }
+    // Operacion getUsers: Obtiene un ArrayList de los users de un studio que recibe como parámetro
+    public ArrayList<EventStudio> getEventsStudios() throws ParseException {
+        return miBD.getEventStudioDAO().getAll();
+    }
+    // Operacion getUsers: Obtiene un ArrayList de los users de un studio que recibe como parámetro
+    public ArrayList<EventUser> getEventsUsers() throws ParseException {
+        return miBD.getEventUserDAO().getAll();
+    }
+
 
     /* Operacion transferencia: Desde una cuenta hace transferencia a otra cuenta, siempre que en la cuenta origen haya dinero disponible.
 

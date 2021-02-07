@@ -90,7 +90,7 @@ public class PerfilActivity extends AppCompatActivity {
         TextView txtUsername = (TextView)findViewById(R.id.txtUsername);
         TextView txtName = (TextView)findViewById(R.id.txtNom);
         TextView txtEmail = (TextView)findViewById(R.id.txtEmail);
-        TextView txtStudio = (TextView)findViewById(R.id.txtStudio);
+        TextView txtStudio = (TextView)findViewById(R.id.txtStudioNom);
 
         if (user.isDev()){
             txtRango.setText("Dev");

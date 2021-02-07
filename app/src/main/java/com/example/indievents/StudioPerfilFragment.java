@@ -7,21 +7,24 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.example.indievents.adapters.GamesAdapter;
+import com.example.indievents.adapters.StudiosAdapter;
+import com.example.indievents.adapters.UsersEventAdapter;
+import com.example.indievents.adapters.UsersStudioAdapter;
 import com.example.indievents.db.IndiEventsOperacional;
 import com.example.indievents.pojo.Event;
 import com.example.indievents.pojo.Studio;
 import com.example.indievents.pojo.User;
-import com.example.indievents.adapters.StudiosAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link StudiosListaFragment#newInstance} factory method to
+ * Use the {@link StudioPerfilFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class StudiosListaFragment extends Fragment {
+public class StudioPerfilFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -33,9 +36,10 @@ public class StudiosListaFragment extends Fragment {
     private String mParam2;
 
     User user;
+    Studio studio;
     IndiEventsOperacional ieo;
 
-    public StudiosListaFragment() {
+    public StudioPerfilFragment() {
         // Required empty public constructor
     }
 
@@ -45,11 +49,11 @@ public class StudiosListaFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment StudiosListaFragment.
+     * @return A new instance of fragment StudioPerfilFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static StudiosListaFragment newInstance(String param1, String param2) {
-        StudiosListaFragment fragment = new StudiosListaFragment();
+    public static StudioPerfilFragment newInstance(String param1, String param2) {
+        StudioPerfilFragment fragment = new StudioPerfilFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -66,34 +70,28 @@ public class StudiosListaFragment extends Fragment {
         }
 
         user = (User)this.getArguments().getSerializable("user");
+        studio = (Studio)this.getArguments().getSerializable("studio");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_studios_lista, container, false);
+        View v = inflater.inflate(R.layout.fragment_studio_perfil, container, false);
 
         ieo = IndiEventsOperacional.getInstance(getActivity().getApplicationContext());
 
-        final Bundle bundle = new Bundle();
-        bundle.putSerializable("user", user);
+        TextView txtNom = (TextView)v.findViewById(R.id.txtStudioNom);
+        txtNom.setText(studio.getNom());
+        TextView txtWeb = (TextView)v.findViewById(R.id.txtStudioWeb);
+        TextView txtEmail = (TextView)v.findViewById(R.id.txtStudioEmail);
+        txtWeb.setText(studio.getWeb());
+        txtEmail.setText(studio.getEmail());
 
-        ListView listaStudios = (ListView)v.findViewById(R.id.lstStudios);
-
-        listaStudios.setAdapter(new StudiosAdapter(this, ieo.getStudios(), R.layout.item_studio));
-
-        listaStudios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                bundle.putSerializable("studio", (Studio)parent.getItemAtPosition(position));
-                Fragment fragment = new StudioPerfilFragment();
-                fragment.setArguments(bundle);
-
-                ((StudiosActivity)getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.studios_container, fragment).commit();
-            }
-        });
-
+        ListView lstDevs = (ListView)v.findViewById(R.id.lstStudioDevs);
+        lstDevs.setAdapter(new UsersStudioAdapter<>(this, studio.getDevelopers(), R.layout.item_user_studio));
+        ListView lstGames = (ListView)v.findViewById(R.id.lstStudioGames);
+        lstGames.setAdapter(new GamesAdapter<>(this, studio.getJocs(), R.layout.item_games));
         return v;
     }
 }

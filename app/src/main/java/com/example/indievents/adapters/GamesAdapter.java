@@ -11,14 +11,15 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.example.indievents.pojo.User;
 import com.example.indievents.R;
+import com.example.indievents.pojo.Game;
+import com.example.indievents.pojo.Studio;
 
 import java.util.List;
 
-public class UsersEventAdapter<T> extends ArrayAdapter<T> {
+public class GamesAdapter<T> extends ArrayAdapter<T> {
     private int layout;
-    public UsersEventAdapter(Fragment context, List<T> objects, @LayoutRes int layout) {
+    public GamesAdapter(Fragment context, List<T> objects, @LayoutRes int layout) {
         super(context.getActivity(), 0, objects);
         this.layout = layout;
     }
@@ -33,16 +34,17 @@ public class UsersEventAdapter<T> extends ArrayAdapter<T> {
             gridView = inflater.inflate(layout, parent, false);
         }
 
-        TextView txtUser = (TextView) gridView.findViewById(R.id.txtUserEvent);
-        TextView txtUserNom = (TextView) gridView.findViewById(R.id.txtUserNomEvent);
-        TextView txtUserStudio = (TextView) gridView.findViewById(R.id.txtUserStudioEvent);
-
-        User item = (User) getItem(position);
+        TextView nomGame = (TextView) gridView.findViewById(R.id.txtGameNom);
+        TextView descGame = (TextView) gridView.findViewById(R.id.txtGameDescripcio);
+        TextView generes = (TextView) gridView.findViewById(R.id.txtGamesGeneres);
 
 
-        txtUser.setText(item.getUsername());
-        txtUserNom.setText("'" + item.getNom() + "'");
-        txtUserStudio.setText(item.getStudio().getNom());
+        Game item = (Game) getItem(position);
+
+
+        nomGame.setText(item.getTitul());
+        descGame.setText(item.getDescripcio());
+        generes.setText(item.getGeneres());
 
         return gridView;
     }

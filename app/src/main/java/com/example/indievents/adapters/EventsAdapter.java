@@ -35,23 +35,19 @@ public class EventsAdapter<T> extends ArrayAdapter<T> {
         }
 
         TextView nomEvent = (TextView) gridView.findViewById(R.id.txtEventNom);
-        TextView txtPreu = (TextView) gridView.findViewById(R.id.txtEventPrecio);
-        TextView txtPreuNum = (TextView) gridView.findViewById(R.id.txtEventPrecioNum);
-        TextView txtFecha = (TextView) gridView.findViewById(R.id.txtEventFecha);
+        TextView txtFechaInici = (TextView) gridView.findViewById(R.id.txtEventFechaInici);
+        TextView txtFechaFinal = (TextView) gridView.findViewById(R.id.txtEventFechaFinal);
         TextView txtStudios = (TextView) gridView.findViewById(R.id.txtEventStudios);
         TextView txtStudiosNum = (TextView) gridView.findViewById(R.id.txtEventStudiosNum);
         TextView txtDevs = (TextView) gridView.findViewById(R.id.txtEventDevs);
         TextView txtDevsNum = (TextView) gridView.findViewById(R.id.txtEventDevsNum);
 
         Event item = (Event) getItem(position);
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-
-
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         nomEvent.setText(item.getNom());
-        txtPreu.setText("Entrada:");
-        txtPreuNum.setText(String.valueOf(item.getPreu()) + "€");
-        txtFecha.setText(String.valueOf(format.format(item.getFechaInici())) + " - " + String.valueOf(format.format(item.getFechaFinal())));
+        txtFechaInici.setText(String.valueOf(format.format(item.getFechaInici())));
+        txtFechaFinal.setText(String.valueOf(format.format(item.getFechaFinal())));
         txtStudios.setText("Studios:");
         txtStudiosNum.setText(String.valueOf(item.getStudiosParticipants().size()));
         txtDevs.setText("Devs:");

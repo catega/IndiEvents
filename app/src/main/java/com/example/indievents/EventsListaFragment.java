@@ -7,10 +7,15 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.example.indievents.db.IndiEventsOperacional;
+import com.example.indievents.pojo.Event;
 import com.example.indievents.pojo.User;
 import com.example.indievents.adapters.EventsAdapter;
+
+import java.text.ParseException;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +34,7 @@ public class EventsListaFragment extends Fragment {
     private String mParam2;
 
     User user;
+    IndiEventsOperacional ieo;
 
     public EventsListaFragment() {
         // Required empty public constructor
@@ -69,9 +75,30 @@ public class EventsListaFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_events_lista, container, false);
 
+        ieo = IndiEventsOperacional.getInstance(getActivity().getApplicationContext());
+
+        final Bundle bundle = new Bundle();
+        bundle.putSerializable("user", user);
+
+
         ListView listaEvents = (ListView)v.findViewById(R.id.lstEvents);
 
-        //listaEvents.setAdapter(new EventsAdapter(this, dt.EVENTS, R.layout.item_events));
+        try {
+            listaEvents.setAdapter(new EventsAdapter(this, ieo.getEvents(), R.layout.item_events));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        listaEvents.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                bundle.putSerializable("event", (Event)parent.getItemAtPosition(position));
+                Fragment fragment = new EventsPerfilFragment();
+                fragment.setArguments(bundle);
+
+                ((EventsActivity)getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.events_container, fragment).commit();
+            }
+        });
 
         return v;
     }

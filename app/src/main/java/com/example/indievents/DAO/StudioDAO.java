@@ -68,10 +68,10 @@ public class StudioDAO implements PojoDAO{
             nuevoStudio.setWeb(cursor.getString(3));
 
             // Obtenemos la lista de users que tiene el studio
-            c.setDevelopers(MiBD.getInstance(null).getUserDAO().getUsers(c));
+            nuevoStudio.setDevelopers(MiBD.getInstance(null).getUserDAO().getUsers(nuevoStudio));
 
             // Obtenemos la lista de games que tiene el studio
-            c.setJocs(MiBD.getInstance(null).getGameDAO().getGames(c));
+            nuevoStudio.setJocs(MiBD.getInstance(null).getGameDAO().getGames(nuevoStudio));
 
 
         }

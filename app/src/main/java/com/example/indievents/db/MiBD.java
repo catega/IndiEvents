@@ -6,6 +6,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.example.indievents.DAO.EventDAO;
+import com.example.indievents.DAO.EventStudioDAO;
+import com.example.indievents.DAO.EventUserDAO;
 import com.example.indievents.DAO.GameDAO;
 import com.example.indievents.DAO.StudioDAO;
 import com.example.indievents.DAO.UserDAO;
@@ -17,7 +20,7 @@ public class MiBD extends SQLiteOpenHelper implements Serializable {
     //nombre de la base de datos
     private static final String database = "IndiEvents";
     //versión de la base de datos
-    private static final int version = 3;
+    private static final int version = 4;
     //Instrucción SQL para crear la tabla de Users
     private String sqlCreacionUsers = "CREATE TABLE users ( id INTEGER PRIMARY KEY AUTOINCREMENT, nom STRING, username STRING, " +
             "password STRING, email STRING, dev INTEGER DEFAULT 0, organizador INTEGER DEFAULT 0, idStudio INTEGER);";
@@ -27,6 +30,13 @@ public class MiBD extends SQLiteOpenHelper implements Serializable {
     //Instruccion SQL para crear la tabla de Games
     private String sqlCreacionGames = "CREATE TABLE games ( id INTEGER PRIMARY KEY AUTOINCREMENT, titul STRING, descripcio STRING," +
             " generes STRING, idStudio INTEGER);";
+    //Instruccion SQL para crear la tabla de Events
+    private String sqlCreacionEvents = "CREATE TABLE events ( id INTEGER PRIMARY KEY AUTOINCREMENT, nom STRING, descripcio STRING," +
+            " web STRING, fechaInici STRING, fechaFinal STRING);";
+    //Instruccion SQL para crear la tabla de EventsUsers
+    private String sqlCreacionEventsUsers = "CREATE TABLE eventsUsers ( idEvent INTEGER, idUser INTEGER);";
+    //Instruccion SQL para crear la tabla de EventsStudios
+    private String sqlCreacionEventsStudios = "CREATE TABLE eventsStudios ( idEvent INTEGER, idStudio INTEGER);";
 
 
     private static MiBD instance = null;
@@ -34,6 +44,9 @@ public class MiBD extends SQLiteOpenHelper implements Serializable {
     private static UserDAO userDAO;
     private static StudioDAO studioDAO;
     private static GameDAO gameDAO;
+    private static EventDAO eventDAO;
+    private static EventStudioDAO eventStudioDAO;
+    private static EventUserDAO eventUserDAO;
 
     public UserDAO getUserDAO() {
         return userDAO;
@@ -47,6 +60,19 @@ public class MiBD extends SQLiteOpenHelper implements Serializable {
         return gameDAO;
     }
 
+    public EventDAO getEventDAO() {
+        return eventDAO;
+    }
+
+    public EventStudioDAO getEventStudioDAO() {
+        return eventStudioDAO;
+    }
+
+    public EventUserDAO getEventUserDAO() {
+        return eventUserDAO;
+    }
+
+
 
     public static MiBD getInstance(Context context) {
         if(instance == null) {
@@ -55,6 +81,9 @@ public class MiBD extends SQLiteOpenHelper implements Serializable {
             userDAO = new UserDAO();
             studioDAO = new StudioDAO();
             gameDAO = new GameDAO();
+            eventDAO = new EventDAO();
+            eventStudioDAO = new EventStudioDAO();
+            eventUserDAO = new EventUserDAO();
         }
         return instance;
     }
@@ -76,6 +105,9 @@ public class MiBD extends SQLiteOpenHelper implements Serializable {
         db.execSQL(sqlCreacionUsers);
         db.execSQL(sqlCreacionStudios);
         db.execSQL(sqlCreacionGames);
+        db.execSQL(sqlCreacionEvents);
+        db.execSQL(sqlCreacionEventsUsers);
+        db.execSQL(sqlCreacionEventsStudios);
 
         insercionDatos(db);
         Log.i("SQLite", "Se crea la base de datos " + database + " version " + version);
@@ -91,11 +123,17 @@ public class MiBD extends SQLiteOpenHelper implements Serializable {
             db.execSQL( "DROP TABLE IF EXISTS users" );
             db.execSQL( "DROP TABLE IF EXISTS studios" );
             db.execSQL( "DROP TABLE IF EXISTS games" );
+            db.execSQL( "DROP TABLE IF EXISTS events" );
+            db.execSQL( "DROP TABLE IF EXISTS eventsUsers" );
+            db.execSQL( "DROP TABLE IF EXISTS eventsStudios" );
 
             //y luego creamos la nueva tabla
             db.execSQL(sqlCreacionUsers);
             db.execSQL(sqlCreacionStudios);
             db.execSQL(sqlCreacionGames);
+            db.execSQL(sqlCreacionEvents);
+            db.execSQL(sqlCreacionEventsUsers);
+            db.execSQL(sqlCreacionEventsStudios);
 
             insercionDatos(db);
             Log.i("SQLite", "Se actualiza versión de la base de datos, New version= " + newVersion  );
@@ -133,5 +171,18 @@ public class MiBD extends SQLiteOpenHelper implements Serializable {
         db.execSQL("INSERT INTO games (id, titul, descripcio, generes, idStudio) VALUES (1, 'Valkyries to Valhalla', 'Un grupo de valkyrias que quieren llegar al Valhalla. Para ello deberán recorrer los diferentes mundos de la mitología nórdica.', 'Accion, Plataformas, Puzzles, Co-op', 1);");
         db.execSQL("INSERT INTO games (id, titul, descripcio, generes, idStudio) VALUES (2, 'TAP', 'Un grupo de chicas se adentra en un mundo virtual en el que deben aguantar un tiempo definido en cada una de las pantallas.', 'Accion, Arcade, Mobil', 1);");
         db.execSQL("INSERT INTO games (id, titul, descripcio, generes, idStudio) VALUES (3, 'Bola de algo', 'Una bola de algo que hace cosas.', 'Accion, Plataformas', 2);");
+
+        // Insertamos los events
+        db.execSQL("INSERT INTO events (id, nom, descripcio, web, fechaInici, fechaFinal) VALUES (1, 'Super Jam', 'Una jam super guay', 'www.eventos.com/superjam', '2021-02-15 12:00:00', '2021-02-17 12:00:00');");
+        db.execSQL("INSERT INTO events (id, nom, descripcio, web, fechaInici, fechaFinal) VALUES (2, 'Mega super Jam', 'Una jam mega super guay', 'www.jams.com/megajam', '2021-02-14 22:30:00', '2021-02-20 10:30:00');");
+
+        // Insertamos los eventsUsers
+        db.execSQL("INSERT INTO eventsUsers (idEvent, idUser) VALUES (1, 1);");
+        db.execSQL("INSERT INTO eventsUsers (idEvent, idUser) VALUES (1, 2);");
+        db.execSQL("INSERT INTO eventsUsers (idEvent, idUser) VALUES (2, 3);");
+
+        // Insertamos los eventsStudios
+        db.execSQL("INSERT INTO eventsStudios (idEvent, idStudio) VALUES (1, 2);");
+        db.execSQL("INSERT INTO eventsStudios (idEvent, idStudio) VALUES (2, 1);");
     }
 }

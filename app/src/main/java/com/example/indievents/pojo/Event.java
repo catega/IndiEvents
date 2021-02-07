@@ -1,27 +1,32 @@
 package com.example.indievents.pojo;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
 public class Event implements Serializable {
-    String nom, descripcio, direccio, web;
+    String nom, descripcio, web;
     Date fechaInici, fechaFinal;
-    float preu;
-    ArrayList<Studio> studiosParticipants = new ArrayList<>();
-    ArrayList<User> developersParticipants = new ArrayList<>();
+    int id;
+    ArrayList<Studio> studiosParticipants;
+    ArrayList<User> developersParticipants;
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     public Event(){
     }
 
-    public Event(String nom, String descripcio, String direccio, String web, Date fechaInici, Date fechaFinal, float preu) {
+    public Event(int id, String nom, String descripcio, String web, String fechaInici, String fechaFinal) throws ParseException {
+        this.id = id;
         this.nom = nom;
         this.descripcio = descripcio;
-        this.direccio = direccio;
-        this.fechaInici = fechaInici;
-        this.fechaFinal = fechaFinal;
-        this.preu = preu;
+        this.fechaInici = dateFormat.parse(fechaInici);
+        this.fechaFinal = dateFormat.parse(fechaFinal);
         this.web = web;
+        this.studiosParticipants = new ArrayList<>();
+        this.developersParticipants = new ArrayList<>();
     }
 
     public String getNom() {
@@ -40,14 +45,6 @@ public class Event implements Serializable {
         this.descripcio = descripcio;
     }
 
-    public String getDireccio() {
-        return direccio;
-    }
-
-    public void setDireccio(String direccio) {
-        this.direccio = direccio;
-    }
-
     public Date getFechaInici() {
         return fechaInici;
     }
@@ -62,14 +59,6 @@ public class Event implements Serializable {
 
     public void setFechaFinal(Date fechaFinal) {
         this.fechaFinal = fechaFinal;
-    }
-
-    public float getPreu() {
-        return preu;
-    }
-
-    public void setPreu(float preu) {
-        this.preu = preu;
     }
 
     public ArrayList<Studio> getStudiosParticipants() {
@@ -96,16 +85,20 @@ public class Event implements Serializable {
         this.developersParticipants = developersParticipants;
     }
 
-    public void addStudio(Studio s){
-        this.getStudiosParticipants().add(s);
+    public int getId(){
+        return this.id;
     }
 
-    public boolean addDev(User u){
-        if (u.isDev()){
-            this.getDevelopersParticipants().add(u);
-            return true;
-        }
-        return false;
+    public void setId(int id){
+        this.id = id;
+    }
+
+    public String getFechaIniciString(){
+        return dateFormat.format(this.fechaInici);
+    }
+
+    public String getFechaFinalString(){
+        return dateFormat.format(this.fechaFinal);
     }
 
     @Override

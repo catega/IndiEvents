@@ -115,6 +115,8 @@ public class UserDAO implements PojoDAO{
                 a = (Studio) MiBD.getInstance(null).getStudioDAO().search(a);
                 nuevoUser.setStudio(a);
 
+                listaUsers.add(nuevoUser);
+
             } while(cursor.moveToNext());
         }
         return listaUsers;
@@ -131,7 +133,6 @@ public class UserDAO implements PojoDAO{
             //Recorremos el cursor hasta que no haya más registros
             do {
                 User nuevoUser = new User();
-                nuevoUser = new User();
                 nuevoUser.setId(cursor.getInt(0));
                 nuevoUser.setNom(cursor.getString(1));
                 nuevoUser.setUsername(cursor.getString(2));

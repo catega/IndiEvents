@@ -7,21 +7,23 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
+import com.example.indievents.adapters.StudiosAdapter;
+import com.example.indievents.adapters.UsersEventAdapter;
 import com.example.indievents.db.IndiEventsOperacional;
 import com.example.indievents.pojo.Event;
-import com.example.indievents.pojo.Studio;
 import com.example.indievents.pojo.User;
-import com.example.indievents.adapters.StudiosAdapter;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link StudiosListaFragment#newInstance} factory method to
+ * Use the {@link EventsPerfilFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class StudiosListaFragment extends Fragment {
+public class EventsPerfilFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -33,9 +35,10 @@ public class StudiosListaFragment extends Fragment {
     private String mParam2;
 
     User user;
+    Event event;
     IndiEventsOperacional ieo;
 
-    public StudiosListaFragment() {
+    public EventsPerfilFragment() {
         // Required empty public constructor
     }
 
@@ -45,11 +48,11 @@ public class StudiosListaFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment StudiosListaFragment.
+     * @return A new instance of fragment EventsPerfilFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static StudiosListaFragment newInstance(String param1, String param2) {
-        StudiosListaFragment fragment = new StudiosListaFragment();
+    public static EventsPerfilFragment newInstance(String param1, String param2) {
+        EventsPerfilFragment fragment = new EventsPerfilFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -66,34 +69,30 @@ public class StudiosListaFragment extends Fragment {
         }
 
         user = (User)this.getArguments().getSerializable("user");
+        event = (Event)this.getArguments().getSerializable("event");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_studios_lista, container, false);
+        View v = inflater.inflate(R.layout.fragment_events_perfil, container, false);
 
         ieo = IndiEventsOperacional.getInstance(getActivity().getApplicationContext());
 
-        final Bundle bundle = new Bundle();
-        bundle.putSerializable("user", user);
+        TextView txtNom = (TextView)v.findViewById(R.id.txtEventNom);
+        txtNom.setText(event.getNom());
+        TextView txtDescripcio = (TextView)v.findViewById(R.id.txtEventDescripcio);
+        txtDescripcio.setText(event.getDescripcio());
+        TextView txtFechaInici = (TextView)v.findViewById(R.id.txtEventFechaInicio);
+        TextView txtFechaFinal = (TextView)v.findViewById(R.id.txtEventFechaFinal);
+        txtFechaInici.setText(event.getFechaIniciString());
+        txtFechaFinal.setText(event.getFechaFinalString());
 
-        ListView listaStudios = (ListView)v.findViewById(R.id.lstStudios);
-
-        listaStudios.setAdapter(new StudiosAdapter(this, ieo.getStudios(), R.layout.item_studio));
-
-        listaStudios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                bundle.putSerializable("studio", (Studio)parent.getItemAtPosition(position));
-                Fragment fragment = new StudioPerfilFragment();
-                fragment.setArguments(bundle);
-
-                ((StudiosActivity)getActivity()).getSupportFragmentManager().beginTransaction().replace(R.id.studios_container, fragment).commit();
-            }
-        });
-
+        ListView lstStudios = (ListView)v.findViewById(R.id.lstEventStudios);
+        lstStudios.setAdapter(new StudiosAdapter(this, event.getStudiosParticipants(), R.layout.item_studio));
+        ListView lstUsers = (ListView)v.findViewById(R.id.lstEventDevs);
+        lstUsers.setAdapter(new UsersEventAdapter(this, event.getDevelopersParticipants(), R.layout.item_user_event));
         return v;
     }
 }
