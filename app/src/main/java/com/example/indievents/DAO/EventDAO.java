@@ -85,6 +85,29 @@ public class EventDAO implements PojoDAO{
         return nuevoEvent;
     }
 
+    public Object searchAlt(Object obj) throws ParseException {
+        Event e = (Event) obj;
+
+        String condicion = "id=" + String.valueOf(e.getId());
+
+        String[] columnas = {
+                "id","nom","descripcio","web","fechaInici","fechaFinal"
+        };
+
+        Cursor cursor = MiBD.getDB().query("events", columnas, condicion, null, null, null, null);
+        Event nuevoEvent = null;
+        if (cursor.moveToFirst()) {
+            nuevoEvent = new Event();
+            nuevoEvent.setId(cursor.getInt(0));
+            nuevoEvent.setNom(cursor.getString(1));
+            nuevoEvent.setDescripcio(cursor.getString(2));
+            nuevoEvent.setWeb(cursor.getString(3));
+            nuevoEvent.setFechaInici(dateFormat.parse(cursor.getString(4)));
+            nuevoEvent.setFechaFinal(dateFormat.parse(cursor.getString(5)));
+        }
+        return nuevoEvent;
+    }
+
     @Override
     public ArrayList getAll() throws ParseException {
         ArrayList<Event> listaEvents = new ArrayList<Event>();

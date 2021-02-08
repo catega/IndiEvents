@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.indievents.adapters.EventsAdapterPerfils;
 import com.example.indievents.adapters.GamesAdapter;
 import com.example.indievents.adapters.StudiosAdapter;
 import com.example.indievents.adapters.UsersEventAdapter;
@@ -92,6 +93,8 @@ public class StudioPerfilFragment extends Fragment {
         lstDevs.setAdapter(new UsersStudioAdapter<>(this, studio.getDevelopers(), R.layout.item_user_studio));
         ListView lstGames = (ListView)v.findViewById(R.id.lstStudioGames);
         lstGames.setAdapter(new GamesAdapter<>(this, studio.getJocs(), R.layout.item_games));
+        ListView listaEventos = (ListView)v.findViewById(R.id.lstStudioEvents);
+        listaEventos.setAdapter(new EventsAdapterPerfils<>(this, studio.getEventosActius(), R.layout.item_events_perfils));
         return v;
     }
 }

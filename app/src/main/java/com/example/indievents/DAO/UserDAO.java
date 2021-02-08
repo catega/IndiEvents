@@ -9,6 +9,7 @@ import com.example.indievents.pojo.Game;
 import com.example.indievents.pojo.Studio;
 import com.example.indievents.pojo.User;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 
 public class UserDAO implements PojoDAO{
@@ -53,7 +54,7 @@ public class UserDAO implements PojoDAO{
     }
 
     @Override
-    public Object search(Object obj) {
+    public Object search(Object obj) throws ParseException {
         User c = (User) obj;
 
         String condicion = "";
@@ -84,12 +85,15 @@ public class UserDAO implements PojoDAO{
             a.setId(cursor.getInt(7));
             a = (Studio) MiBD.getInstance(null).getStudioDAO().search(a);
             nuevoUser.setStudio(a);
+
+            // Obtenemos la lista de events que tiene el studio
+            nuevoUser.setEventosEnSolitari(MiBD.getInstance(null).getEventUserDAO().getEvents(nuevoUser));
         }
         return nuevoUser;
     }
 
     @Override
-    public ArrayList getAll() {
+    public ArrayList getAll() throws ParseException {
         ArrayList<User> listaUsers = new ArrayList<User>();
         String[] columnas = {
                 "id","nom","username","password","email","dev","organizador","idStudio"
@@ -114,6 +118,9 @@ public class UserDAO implements PojoDAO{
                 a.setId(cursor.getInt(6));
                 a = (Studio) MiBD.getInstance(null).getStudioDAO().search(a);
                 nuevoUser.setStudio(a);
+
+                // Obtenemos la lista de events que tiene el studio
+                nuevoUser.setEventosEnSolitari(MiBD.getInstance(null).getEventUserDAO().getEvents(nuevoUser));
 
                 listaUsers.add(nuevoUser);
 

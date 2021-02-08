@@ -140,14 +140,14 @@ public class EventStudioDAO implements PojoDAO{
         for (EventStudio es : listaEventStudio){
             Event e = new Event();
             e.setId(es.getIdEvent());
-            e = (Event) MiBD.getInstance(null).getEventDAO().search(e);
+            e = (Event) MiBD.getInstance(null).getEventDAO().searchAlt(e);
             listaEvents.add(e);
         }
 
         return listaEvents;
     }
 
-    public ArrayList getStudios(Event event){
+    public ArrayList getStudios(Event event) throws ParseException {
         ArrayList<EventStudio> listaEventStudio = getEventsStudio_E(event);
         ArrayList<Studio> listaStudios = new ArrayList<Studio>();
 

@@ -12,8 +12,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.indievents.adapters.EventsAdapterPerfils;
+import com.example.indievents.adapters.EventsAdapterPerfilsActivity;
+import com.example.indievents.adapters.StudiosAdapter;
 import com.example.indievents.pojo.User;
 import com.google.android.material.navigation.NavigationView;
 
@@ -91,6 +95,9 @@ public class PerfilActivity extends AppCompatActivity {
         TextView txtName = (TextView)findViewById(R.id.txtNom);
         TextView txtEmail = (TextView)findViewById(R.id.txtEmail);
         TextView txtStudio = (TextView)findViewById(R.id.txtStudioNom);
+
+        ListView listaEventos = (ListView)findViewById(R.id.lstEventosUser);
+        listaEventos.setAdapter(new EventsAdapterPerfilsActivity<>(this, user.getEventosEnSolitari(), R.layout.item_events_perfils));
 
         if (user.isDev()){
             txtRango.setText("Dev");

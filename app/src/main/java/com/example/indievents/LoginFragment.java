@@ -15,6 +15,8 @@ import android.widget.Toast;
 import com.example.indievents.db.IndiEventsOperacional;
 import com.example.indievents.pojo.User;
 
+import java.text.ParseException;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link LoginFragment#newInstance} factory method to
@@ -80,7 +82,11 @@ public class LoginFragment extends Fragment {
                 User u = new User();
                 u.setUsername(edtUsername.getText().toString());
                 u.setPassword(edtPass.getText().toString());
-                u = ieo.login(u);
+                try {
+                    u = ieo.login(u);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
 
                 if(u == null){
                     Toast.makeText(getActivity(), "Los datos no coinciden", Toast.LENGTH_LONG).show();

@@ -36,7 +36,7 @@ public class IndiEventsOperacional implements Serializable {
 
     // Operacion Login: Verifica que el user existe y que su contraseña es correcta. Recibira un user
     // que solo contendrá el username y la password.
-    public User login(User u){
+    public User login(User u) throws ParseException {
         User aux = (User) miBD.getUserDAO().search(u);
         if(aux==null){
             return null;
@@ -47,7 +47,7 @@ public class IndiEventsOperacional implements Serializable {
         }
     }
 
-    public User comprobarRegistro(User u){
+    public User comprobarRegistro(User u) throws ParseException {
         User aux = (User) miBD.getUserDAO().search(u);
         if(aux==null)
             return null;
@@ -82,7 +82,7 @@ public class IndiEventsOperacional implements Serializable {
     }
 
     // Operacion getUsers: Obtiene un ArrayList de los users de un studio que recibe como parámetro
-    public ArrayList<User> getStudios(){
+    public ArrayList<User> getStudios() throws ParseException {
         return miBD.getStudioDAO().getAll();
     }
     // Operacion getUsers: Obtiene un ArrayList de los users de un studio que recibe como parámetro

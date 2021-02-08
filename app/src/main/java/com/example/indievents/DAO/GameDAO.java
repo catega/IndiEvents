@@ -8,6 +8,7 @@ import com.example.indievents.pojo.Game;
 import com.example.indievents.pojo.Studio;
 import com.example.indievents.pojo.User;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 
 public class GameDAO implements PojoDAO{
@@ -48,7 +49,7 @@ public class GameDAO implements PojoDAO{
     }
 
     @Override
-    public Object search(Object obj) {
+    public Object search(Object obj) throws ParseException {
         Game c = (Game) obj;
         String condicion = "id=" + String.valueOf(c.getId());
 
@@ -75,7 +76,7 @@ public class GameDAO implements PojoDAO{
     }
 
     @Override
-    public ArrayList getAll() {
+    public ArrayList getAll() throws ParseException {
         ArrayList<Game> listaGames = new ArrayList<Game>();
         String[] columnas = {
                 "id","titul","descripcio","generes","idStudio"

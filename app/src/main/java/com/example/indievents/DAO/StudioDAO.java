@@ -9,6 +9,7 @@ import com.example.indievents.pojo.Event;
 import com.example.indievents.pojo.Studio;
 import com.example.indievents.pojo.User;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 
 public class StudioDAO implements PojoDAO{
@@ -49,7 +50,7 @@ public class StudioDAO implements PojoDAO{
     }
 
     @Override
-    public Object search(Object obj) {
+    public Object search(Object obj) throws ParseException {
         Studio c = (Studio) obj;
 
         String condicion = "id=" + String.valueOf(c.getId());
@@ -69,9 +70,10 @@ public class StudioDAO implements PojoDAO{
 
             // Obtenemos la lista de users que tiene el studio
             nuevoStudio.setDevelopers(MiBD.getInstance(null).getUserDAO().getUsers(nuevoStudio));
-
             // Obtenemos la lista de games que tiene el studio
             nuevoStudio.setJocs(MiBD.getInstance(null).getGameDAO().getGames(nuevoStudio));
+            // Obtenemos la lista de events que tiene el studio
+            nuevoStudio.setEventosActius(MiBD.getInstance(null).getEventStudioDAO().getEvents(nuevoStudio));
 
 
         }
@@ -79,7 +81,7 @@ public class StudioDAO implements PojoDAO{
     }
 
     @Override
-    public ArrayList getAll() {
+    public ArrayList getAll() throws ParseException {
         ArrayList<Studio> listaStudios = new ArrayList<Studio>();
         String[] columnas = {
                 "id","nom","email","web"
@@ -97,9 +99,10 @@ public class StudioDAO implements PojoDAO{
 
                 // Obtenemos la lista de users que tiene el studio
                 c.setDevelopers(MiBD.getInstance(null).getUserDAO().getUsers(c));
-
                 // Obtenemos la lista de games que tiene el studio
                 c.setJocs(MiBD.getInstance(null).getGameDAO().getGames(c));
+                // Obtenemos la lista de events que tiene el studio
+                c.setEventosActius(MiBD.getInstance(null).getEventStudioDAO().getEvents(c));
 
                 listaStudios.add(c);
 

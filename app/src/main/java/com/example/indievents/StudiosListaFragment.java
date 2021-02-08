@@ -16,6 +16,8 @@ import com.example.indievents.pojo.Studio;
 import com.example.indievents.pojo.User;
 import com.example.indievents.adapters.StudiosAdapter;
 
+import java.text.ParseException;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link StudiosListaFragment#newInstance} factory method to
@@ -81,7 +83,11 @@ public class StudiosListaFragment extends Fragment {
 
         ListView listaStudios = (ListView)v.findViewById(R.id.lstStudios);
 
-        listaStudios.setAdapter(new StudiosAdapter(this, ieo.getStudios(), R.layout.item_studio));
+        try {
+            listaStudios.setAdapter(new StudiosAdapter(this, ieo.getStudios(), R.layout.item_studio));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         listaStudios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

@@ -141,14 +141,14 @@ public class EventUserDAO implements PojoDAO{
         for (EventUser es : listaEventUser){
             Event e = new Event();
             e.setId(es.getIdEvent());
-            e = (Event) MiBD.getInstance(null).getEventDAO().search(e);
+            e = (Event) MiBD.getInstance(null).getEventDAO().searchAlt(e);
             listaEvents.add(e);
         }
 
         return listaEvents;
     }
 
-    public ArrayList getUsers(Event event){
+    public ArrayList getUsers(Event event) throws ParseException {
         ArrayList<EventUser> listaEventUser = getEventsUser_E(event);
         ArrayList<User> listaUsers = new ArrayList<User>();
 

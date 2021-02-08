@@ -16,6 +16,8 @@ import android.widget.Toast;
 import com.example.indievents.db.IndiEventsOperacional;
 import com.example.indievents.pojo.User;
 
+import java.text.ParseException;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link RegisterFragment#newInstance} factory method to
@@ -97,14 +99,18 @@ public class RegisterFragment extends Fragment {
                 nuevoUser.setEmail(edtEmail.getText().toString());
                 nuevoUser.setDev(chkDev.isChecked());
 
-                if (ieo.comprobarRegistro(nuevoUser) == null){
-                    ieo.registrarUsuario(nuevoUser);
+                try {
+                    if (ieo.comprobarRegistro(nuevoUser) == null){
+                        ieo.registrarUsuario(nuevoUser);
 
-                    Intent intent = new Intent(getActivity(), PrincipalActivity.class);
-                    intent.putExtra("user", nuevoUser);
-                    startActivity(intent);
-                }else
-                    Toast.makeText(getActivity().getApplicationContext(), "El usuario ya existe", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(getActivity(), PrincipalActivity.class);
+                        intent.putExtra("user", nuevoUser);
+                        startActivity(intent);
+                    }else
+                        Toast.makeText(getActivity().getApplicationContext(), "El usuario ya existe", Toast.LENGTH_LONG).show();
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
             }
         });
 
