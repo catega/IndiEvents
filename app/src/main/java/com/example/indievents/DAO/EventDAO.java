@@ -27,6 +27,7 @@ public class EventDAO implements PojoDAO{
         contentValues.put("web", e.getWeb());
         contentValues.put("fechaInici", dateFormat.format(e.getFechaInici()));
         contentValues.put("fechaFinal", dateFormat.format(e.getFechaFinal()));
+        contentValues.put("idAdmin", e.getIdAdmin());
 
         return MiBD.getDB().insert("events", null, contentValues);
     }
@@ -41,6 +42,7 @@ public class EventDAO implements PojoDAO{
         contentValues.put("web", e.getWeb());
         contentValues.put("fechaInici", dateFormat.format(e.getFechaInici()));
         contentValues.put("fechaFinal", dateFormat.format(e.getFechaFinal()));
+        contentValues.put("idAdmin", e.getIdAdmin());
 
         String condicion = "id=" + String.valueOf(e.getId());
 
@@ -65,7 +67,7 @@ public class EventDAO implements PojoDAO{
         String condicion = "id=" + String.valueOf(e.getId());
 
         String[] columnas = {
-                "id","nom","descripcio","web","fechaInici","fechaFinal"
+                "id","nom","descripcio","web","fechaInici","fechaFinal","idAdmin"
         };
 
         Cursor cursor = MiBD.getDB().query("events", columnas, condicion, null, null, null, null);
@@ -78,6 +80,7 @@ public class EventDAO implements PojoDAO{
             nuevoEvent.setWeb(cursor.getString(3));
             nuevoEvent.setFechaInici(dateFormat.parse(cursor.getString(4)));
             nuevoEvent.setFechaFinal(dateFormat.parse(cursor.getString(5)));
+            nuevoEvent.setIdAdmin(cursor.getInt(6));
 
             nuevoEvent.setStudiosParticipants(MiBD.getInstance(null).getEventStudioDAO().getStudios(e));
             nuevoEvent.setDevelopersParticipants(MiBD.getInstance(null).getEventUserDAO().getUsers(e));
@@ -91,7 +94,7 @@ public class EventDAO implements PojoDAO{
         String condicion = "id=" + String.valueOf(e.getId());
 
         String[] columnas = {
-                "id","nom","descripcio","web","fechaInici","fechaFinal"
+                "id","nom","descripcio","web","fechaInici","fechaFinal","idAdmin"
         };
 
         Cursor cursor = MiBD.getDB().query("events", columnas, condicion, null, null, null, null);
@@ -104,6 +107,7 @@ public class EventDAO implements PojoDAO{
             nuevoEvent.setWeb(cursor.getString(3));
             nuevoEvent.setFechaInici(dateFormat.parse(cursor.getString(4)));
             nuevoEvent.setFechaFinal(dateFormat.parse(cursor.getString(5)));
+            nuevoEvent.setIdAdmin(cursor.getInt(6));
         }
         return nuevoEvent;
     }
@@ -112,7 +116,7 @@ public class EventDAO implements PojoDAO{
     public ArrayList getAll() throws ParseException {
         ArrayList<Event> listaEvents = new ArrayList<Event>();
         String[] columnas = {
-                "id","nom","descripcio","web","fechaInici","fechaFinal"
+                "id","nom","descripcio","web","fechaInici","fechaFinal","idAdmin"
         };
         Cursor cursor = MiBD.getDB().query("events", columnas, null, null, null, null, null);
 
@@ -126,6 +130,7 @@ public class EventDAO implements PojoDAO{
                 nuevoEvent.setWeb(cursor.getString(3));
                 nuevoEvent.setFechaInici(dateFormat.parse(cursor.getString(4)));
                 nuevoEvent.setFechaFinal(dateFormat.parse(cursor.getString(5)));
+                nuevoEvent.setIdAdmin(cursor.getInt(6));
 
                 nuevoEvent.setStudiosParticipants(MiBD.getInstance(null).getEventStudioDAO().getStudios(nuevoEvent));
                 nuevoEvent.setDevelopersParticipants(MiBD.getInstance(null).getEventUserDAO().getUsers(nuevoEvent));

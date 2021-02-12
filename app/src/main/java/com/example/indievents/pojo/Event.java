@@ -10,7 +10,7 @@ import java.util.Date;
 public class Event implements Serializable {
     String nom, descripcio, web;
     Date fechaInici, fechaFinal;
-    int id;
+    int id, idAdmin;
     ArrayList<Studio> studiosParticipants;
     ArrayList<User> developersParticipants;
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -18,7 +18,7 @@ public class Event implements Serializable {
     public Event(){
     }
 
-    public Event(int id, String nom, String descripcio, String web, String fechaInici, String fechaFinal) throws ParseException {
+    public Event(int id, String nom, String descripcio, String web, String fechaInici, String fechaFinal, int idAdmin) throws ParseException {
         this.id = id;
         this.nom = nom;
         this.descripcio = descripcio;
@@ -27,6 +27,7 @@ public class Event implements Serializable {
         this.web = web;
         this.studiosParticipants = new ArrayList<>();
         this.developersParticipants = new ArrayList<>();
+        this.idAdmin = idAdmin;
     }
 
     public String getNom() {
@@ -99,6 +100,14 @@ public class Event implements Serializable {
 
     public String getFechaFinalString(){
         return dateFormat.format(this.fechaFinal);
+    }
+
+    public int getIdAdmin() {
+        return idAdmin;
+    }
+
+    public void setIdAdmin(int idAdmin) {
+        this.idAdmin = idAdmin;
     }
 
     @Override

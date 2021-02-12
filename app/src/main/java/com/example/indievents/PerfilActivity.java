@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -96,8 +98,9 @@ public class PerfilActivity extends AppCompatActivity {
         TextView txtEmail = (TextView)findViewById(R.id.txtEmail);
         TextView txtStudio = (TextView)findViewById(R.id.txtStudioNom);
 
-        ListView listaEventos = (ListView)findViewById(R.id.lstEventosUser);
-        listaEventos.setAdapter(new EventsAdapterPerfilsActivity<>(this, user.getEventosEnSolitari(), R.layout.item_events_perfils));
+        RecyclerView listaEventos = (RecyclerView)findViewById(R.id.lstEventosUser);
+        listaEventos.setAdapter(new EventsAdapterPerfilsActivity(this, user.getEventosEnSolitari(), R.layout.item_events_perfils));
+        listaEventos.setLayoutManager(new LinearLayoutManager(this));
 
         if (user.isDev()){
             txtRango.setText("Dev");

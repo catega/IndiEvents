@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Studio implements Serializable {
     int id;
     String nom, email, web;
-    User studioAdmin;
+    int studioAdmin;
     ArrayList<User> developers;
     ArrayList<Event> eventosActius;
     ArrayList<Game> jocs;
@@ -15,7 +15,7 @@ public class Studio implements Serializable {
         super();
     }
 
-    public Studio(int id, String nom, String email, String web, User studioAdmin){
+    public Studio(int id, String nom, String email, String web, int studioAdmin){
         this.id = id;
         this.nom = nom;
         this.email = email;
@@ -50,11 +50,11 @@ public class Studio implements Serializable {
         this.web = web;
     }
 
-    public User getStudioAdmin() {
+    public int getStudioAdmin() {
         return studioAdmin;
     }
 
-    public void setStudioAdmin(User studioAdmin) {
+    public void setStudioAdmin(int studioAdmin) {
         this.studioAdmin = studioAdmin;
     }
 

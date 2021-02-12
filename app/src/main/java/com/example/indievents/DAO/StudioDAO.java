@@ -21,6 +21,7 @@ public class StudioDAO implements PojoDAO{
         contentValues.put("nom" , c.getNom());
         contentValues.put("email", c.getEmail());
         contentValues.put("web", c.getWeb());
+        contentValues.put("idAdmin", c.getStudioAdmin());
         return MiBD.getDB().insert("studios", null, contentValues);
     }
 
@@ -32,6 +33,7 @@ public class StudioDAO implements PojoDAO{
         contentValues.put("nom" , c.getNom());
         contentValues.put("email", c.getEmail());
         contentValues.put("web", c.getWeb());
+        contentValues.put("idAdmin", c.getStudioAdmin());
 
         String condicion = "id=" + String.valueOf(c.getId());
 
@@ -56,7 +58,7 @@ public class StudioDAO implements PojoDAO{
         String condicion = "id=" + String.valueOf(c.getId());
 
         String[] columnas = {
-                "id","nom","email","web"
+                "id","nom","email","web","idAdmin"
         };
 
         Cursor cursor = MiBD.getDB().query("studios", columnas, condicion, null, null, null, null);
@@ -67,6 +69,7 @@ public class StudioDAO implements PojoDAO{
             nuevoStudio.setNom(cursor.getString(1));
             nuevoStudio.setEmail(cursor.getString(2));
             nuevoStudio.setWeb(cursor.getString(3));
+            c.setStudioAdmin(cursor.getInt(4));
 
             // Obtenemos la lista de users que tiene el studio
             nuevoStudio.setDevelopers(MiBD.getInstance(null).getUserDAO().getUsers(nuevoStudio));
@@ -84,7 +87,7 @@ public class StudioDAO implements PojoDAO{
     public ArrayList getAll() throws ParseException {
         ArrayList<Studio> listaStudios = new ArrayList<Studio>();
         String[] columnas = {
-                "id","nom","email","web"
+                "id","nom","email","web","idAdmin"
         };
         Cursor cursor = MiBD.getDB().query("studios", columnas, null, null, null, null, null);
 
@@ -96,6 +99,7 @@ public class StudioDAO implements PojoDAO{
                 c.setNom(cursor.getString(1));
                 c.setEmail(cursor.getString(2));
                 c.setWeb(cursor.getString(3));
+                c.setStudioAdmin(cursor.getInt(4));
 
                 // Obtenemos la lista de users que tiene el studio
                 c.setDevelopers(MiBD.getInstance(null).getUserDAO().getUsers(c));

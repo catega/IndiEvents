@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
-        android:text="Generes:"
+        android:text="Generos:"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -144,13 +144,53 @@
             app:layout_constraintTop_toBottomOf="@+id/chkGestion" />
 
         <CheckBox
-            android:id="@+id/checkBox10"
+            android:id="@+id/chkNovelaVisual"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="CheckBox"
+            android:text="Novela Visual"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/chkJrpg" />
+
+        <CheckBox
+            android:id="@+id/chkPlataformas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Plataformas"
+            app:layout_constraintStart_toEndOf="@+id/chkNovelaVisual"
+            app:layout_constraintTop_toBottomOf="@+id/chkLucha" />
+
+        <CheckBox
+            android:id="@+id/chkRPG"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="RPG"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chkNovelaVisual" />
+
+        <CheckBox
+            android:id="@+id/chkShooter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Shooter"
+            app:layout_constraintStart_toEndOf="@+id/chkRPG"
+            app:layout_constraintTop_toBottomOf="@+id/chkPlataformas" />
+
+        <CheckBox
+            android:id="@+id/chkSurvival"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Survival"
+            app:layout_constraintStart_toEndOf="@+id/chkShooter"
+            app:layout_constraintTop_toBottomOf="@+id/chkPlataformas" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,6 +3,8 @@ package com.example.indievents;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -89,12 +91,17 @@ public class StudioPerfilFragment extends Fragment {
         txtWeb.setText(studio.getWeb());
         txtEmail.setText(studio.getEmail());
 
-        ListView lstDevs = (ListView)v.findViewById(R.id.lstStudioDevs);
-        lstDevs.setAdapter(new UsersStudioAdapter<>(this, studio.getDevelopers(), R.layout.item_user_studio));
-        ListView lstGames = (ListView)v.findViewById(R.id.lstStudioGames);
-        lstGames.setAdapter(new GamesAdapter<>(this, studio.getJocs(), R.layout.item_games));
-        ListView listaEventos = (ListView)v.findViewById(R.id.lstStudioEvents);
-        listaEventos.setAdapter(new EventsAdapterPerfils<>(this, studio.getEventosActius(), R.layout.item_events_perfils));
+        RecyclerView lstDevs = (RecyclerView)v.findViewById(R.id.lstStudioDevs);
+        lstDevs.setAdapter(new UsersStudioAdapter(this, studio.getDevelopers(), R.layout.item_user_studio));
+        lstDevs.setLayoutManager(new LinearLayoutManager(this.getActivity()));
+
+        RecyclerView lstGames = (RecyclerView)v.findViewById(R.id.lstStudioGames);
+        lstGames.setAdapter(new GamesAdapter(this, studio.getJocs(), R.layout.item_games));
+        lstGames.setLayoutManager(new LinearLayoutManager(this.getActivity()));
+
+        RecyclerView listaEventos = (RecyclerView)v.findViewById(R.id.lstStudioEvents);
+        listaEventos.setAdapter(new EventsAdapterPerfils(this, studio.getEventosActius(), R.layout.item_events_perfils));
+        listaEventos.setLayoutManager(new LinearLayoutManager(this.getActivity()));
         return v;
     }
 }

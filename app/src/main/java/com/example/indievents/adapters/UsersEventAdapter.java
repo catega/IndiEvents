@@ -10,40 +10,53 @@ import android.widget.TextView;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.indievents.pojo.User;
 import com.example.indievents.R;
 
 import java.util.List;
 
-public class UsersEventAdapter<T> extends ArrayAdapter<T> {
+public class UsersEventAdapter extends RecyclerView.Adapter<UsersEventAdapter.ViewHolder> {
     private int layout;
-    public UsersEventAdapter(Fragment context, List<T> objects, @LayoutRes int layout) {
-        super(context.getActivity(), 0, objects);
+    private Context context;
+    List<User> users;
+
+    public UsersEventAdapter(Fragment context, List<User> objects, @LayoutRes int layout) {
+        this.context = context.getActivity();
         this.layout = layout;
+        this.users = objects;
     }
+
 
     @NonNull
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View gridView = convertView;
+    public UsersEventAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View view = inflater.inflate(layout, parent, false);
+        return new UsersEventAdapter.ViewHolder(view);
+    }
 
-        if (null == convertView) {
-            gridView = inflater.inflate(layout, parent, false);
+    @Override
+    public void onBindViewHolder(@NonNull UsersEventAdapter.ViewHolder holder, int position) {
+        holder.txtUser.setText(users.get(position).getUsername());
+        holder.txtUserName.setText(users.get(position).getNom());
+        holder.txtUserStudio.setText(users.get(position).getStudio().getNom());
+    }
+
+    @Override
+    public int getItemCount() {
+        return users.size();
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder{
+        TextView txtUser, txtUserName, txtUserStudio;
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            txtUser = itemView.findViewById(R.id.txtUserEvent);
+            txtUserName = itemView.findViewById(R.id.txtUserNomEvent);
+            txtUserStudio = itemView.findViewById(R.id.txtUserStudioEvent);
         }
-
-        TextView txtUser = (TextView) gridView.findViewById(R.id.txtUserEvent);
-        TextView txtUserNom = (TextView) gridView.findViewById(R.id.txtUserNomEvent);
-        TextView txtUserStudio = (TextView) gridView.findViewById(R.id.txtUserStudioEvent);
-
-        User item = (User) getItem(position);
-
-
-        txtUser.setText(item.getUsername());
-        txtUserNom.setText("'" + item.getNom() + "'");
-        txtUserStudio.setText(item.getStudio().getNom());
-
-        return gridView;
     }
 }

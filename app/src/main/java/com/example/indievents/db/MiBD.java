@@ -20,19 +20,19 @@ public class MiBD extends SQLiteOpenHelper implements Serializable {
     //nombre de la base de datos
     private static final String database = "IndiEvents";
     //versión de la base de datos
-    private static final int version = 4;
+    private static final int version = 5;
     //Instrucción SQL para crear la tabla de Users
     private String sqlCreacionUsers = "CREATE TABLE users ( id INTEGER PRIMARY KEY AUTOINCREMENT, nom STRING, username STRING, " +
             "password STRING, email STRING, dev INTEGER DEFAULT 0, organizador INTEGER DEFAULT 0, idStudio INTEGER);";
     //Instruccion SQL para crear la tabla de Studios
     private String sqlCreacionStudios = "CREATE TABLE studios ( id INTEGER PRIMARY KEY AUTOINCREMENT, nom STRING, email STRING, " +
-            "web STRING);" ;
+            "web STRING, idAdmin INTEGER);" ;
     //Instruccion SQL para crear la tabla de Games
     private String sqlCreacionGames = "CREATE TABLE games ( id INTEGER PRIMARY KEY AUTOINCREMENT, titul STRING, descripcio STRING," +
             " generes STRING, idStudio INTEGER);";
     //Instruccion SQL para crear la tabla de Events
     private String sqlCreacionEvents = "CREATE TABLE events ( id INTEGER PRIMARY KEY AUTOINCREMENT, nom STRING, descripcio STRING," +
-            " web STRING, fechaInici STRING, fechaFinal STRING);";
+            " web STRING, fechaInici STRING, fechaFinal STRING, idAdmin INTEGER);";
     //Instruccion SQL para crear la tabla de EventsUsers
     private String sqlCreacionEventsUsers = "CREATE TABLE eventsUsers ( idEvent INTEGER, idUser INTEGER);";
     //Instruccion SQL para crear la tabla de EventsStudios
@@ -164,8 +164,8 @@ public class MiBD extends SQLiteOpenHelper implements Serializable {
         db.execSQL("INSERT INTO users(id, nom, username, password, email, dev, organizador, idStudio) VALUES (3, 'Bisan Teeko', 'Teeko', '1234', 'bisanteeko@gmail.com', 1, 0, 2);");
 
         // Insertamos los studios
-        db.execSQL("INSERT INTO studios (id, nom, email, web) VALUES (1, 'Badana Tales', 'badanatales@gmail.com', 'www.badanatales.com');");
-        db.execSQL("INSERT INTO studios (id, nom, email, web) VALUES (2, 'Birloncho Games', 'birlonchogames@gmail.com', 'www.birloncho.com');");
+        db.execSQL("INSERT INTO studios (id, nom, email, web, idAdmin) VALUES (1, 'Badana Tales', 'badanatales@gmail.com', 'www.badanatales.com', 1);");
+        db.execSQL("INSERT INTO studios (id, nom, email, web, idAdmin) VALUES (2, 'Birloncho Games', 'birlonchogames@gmail.com', 'www.birloncho.com', 3);");
 
         // Insertamos los games
         db.execSQL("INSERT INTO games (id, titul, descripcio, generes, idStudio) VALUES (1, 'Valkyries to Valhalla', 'Un grupo de valkyrias que quieren llegar al Valhalla. Para ello deberán recorrer los diferentes mundos de la mitología nórdica.', 'Accion, Plataformas, Puzzles, Co-op', 1);");
@@ -173,8 +173,8 @@ public class MiBD extends SQLiteOpenHelper implements Serializable {
         db.execSQL("INSERT INTO games (id, titul, descripcio, generes, idStudio) VALUES (3, 'Bola de algo', 'Una bola de algo que hace cosas.', 'Accion, Plataformas', 2);");
 
         // Insertamos los events
-        db.execSQL("INSERT INTO events (id, nom, descripcio, web, fechaInici, fechaFinal) VALUES (1, 'Super Jam', 'Una jam super guay', 'www.eventos.com/superjam', '2021-02-15 12:00:00', '2021-02-17 12:00:00');");
-        db.execSQL("INSERT INTO events (id, nom, descripcio, web, fechaInici, fechaFinal) VALUES (2, 'Mega super Jam', 'Una jam mega super guay', 'www.jams.com/megajam', '2021-02-14 22:30:00', '2021-02-20 10:30:00');");
+        db.execSQL("INSERT INTO events (id, nom, descripcio, web, fechaInici, fechaFinal, idAdmin) VALUES (1, 'Super Jam', 'Una jam super guay', 'www.eventos.com/superjam', '2021-02-15 12:00:00', '2021-02-17 12:00:00', 2);");
+        db.execSQL("INSERT INTO events (id, nom, descripcio, web, fechaInici, fechaFinal, idAdmin) VALUES (2, 'Mega super Jam', 'Una jam mega super guay', 'www.jams.com/megajam', '2021-02-14 22:30:00', '2021-02-20 10:30:00', 2);");
 
         // Insertamos los eventsUsers
         db.execSQL("INSERT INTO eventsUsers (idEvent, idUser) VALUES (1, 1);");
