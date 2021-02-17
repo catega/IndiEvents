@@ -1,7 +1,10 @@
 package com.example.indievents.db;
 
 import android.content.Context;
+import android.os.Debug;
+import android.widget.Toast;
 
+import com.example.indievents.DAO.EventUserDAO;
 import com.example.indievents.pojo.Event;
 import com.example.indievents.pojo.EventStudio;
 import com.example.indievents.pojo.EventUser;
@@ -57,6 +60,56 @@ public class IndiEventsOperacional implements Serializable {
 
     public void registrarUsuario(User u){
         miBD.getUserDAO().add(u);
+    }
+
+    public void registrarStudio(Studio s, User u) throws ParseException {
+        s.setStudioAdmin(u.getId());
+        miBD.getStudioDAO().add(s);
+        Studio sGet = (Studio)miBD.getStudioDAO().search(s);
+        u.setStudio(sGet);
+        miBD.getUserDAO().update(u);
+    }
+
+    public void actualizarUsuario(User u){
+        miBD.getUserDAO().update(u);
+    }
+
+    public void registrarJoc(Game g, Studio s) throws ParseException {
+        Studio sGet = (Studio)miBD.getStudioDAO().search(s);
+        g.setStudio(sGet);
+        miBD.getGameDAO().add(g);
+    }
+
+    public void apuntarUserEvent(User u, Event e){
+        EventUser eu = new EventUser(e.getId(), u.getId());
+        miBD.getEventUserDAO().add(eu);
+    }
+
+    public boolean comprobarRegistroUserEvento(User u, Event e) throws ParseException {
+        EventUser eu = new EventUser(e.getId(), u.getId());
+
+        if (miBD.getEventUserDAO().search(eu) != null)
+            return true;
+
+        return false;
+    }
+
+    public void apuntarStudioEvent(User u, Event e){
+        EventStudio es = new EventStudio(e.getId(), u.getStudio().getId());
+        miBD.getEventStudioDAO().add(es);
+    }
+
+    public boolean comprobarRegistroStudioEvento(User u, Event e) throws ParseException {
+        EventStudio es = new EventStudio(e.getId(), u.getStudio().getId());
+
+        if (miBD.getEventStudioDAO().search(es) != null)
+            return true;
+
+        return false;
+    }
+
+    public User userUpdated(User u) throws ParseException {
+        return (User)miBD.getUserDAO().search(u);
     }
 
     // Operacion changePassword: Cambia la password del cliente. Recibirá el cliente de la aplicación con la password cambiada.

@@ -59,12 +59,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="16dp"
                 android:text="Studios:"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtFechaFinalLabel" />
+                app:layout_constraintTop_toBottomOf="@+id/btnUnirseStudio" />
 
             <TextView
                 android:id="@+id/textView8"
@@ -137,6 +137,32 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btnUnirseUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/buttons"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="Apuntarse"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtFechaFinalLabel" />
+
+            <Button
+                android:id="@+id/btnUnirseStudio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/buttons"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:text="Apuntar Studio"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnUnirseUser" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 

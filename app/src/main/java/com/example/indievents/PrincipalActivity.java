@@ -70,7 +70,12 @@ public class PrincipalActivity extends AppCompatActivity {
                         intent = new Intent(getBaseContext(), EventsActivity.class);
                         break;
                     case R.id.menuStudios:
+                        Bundle bundle = new Bundle();
+                        bundle.putSerializable("user", user);
+                        bundle.putInt("fragment", 0);
                         intent = new Intent(getBaseContext(), StudiosActivity.class);
+                        intent.putExtras(bundle);
+                        startActivity(intent);
                         break;
                     case R.id.menuPerfil:
                         intent = new Intent(getBaseContext(), PerfilActivity.class);

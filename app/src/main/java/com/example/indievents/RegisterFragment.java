@@ -104,7 +104,7 @@ public class RegisterFragment extends Fragment {
                         ieo.registrarUsuario(nuevoUser);
 
                         Intent intent = new Intent(getActivity(), PrincipalActivity.class);
-                        intent.putExtra("user", nuevoUser);
+                        intent.putExtra("user", ieo.comprobarRegistro(nuevoUser));
                         startActivity(intent);
                     }else
                         Toast.makeText(getActivity().getApplicationContext(), "El usuario ya existe", Toast.LENGTH_LONG).show();

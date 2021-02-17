@@ -55,7 +55,12 @@ public class StudioDAO implements PojoDAO{
     public Object search(Object obj) throws ParseException {
         Studio c = (Studio) obj;
 
-        String condicion = "id=" + String.valueOf(c.getId());
+        String condicion = "";
+        if(TextUtils.isEmpty(c.getNom())){
+            condicion = "id=" + String.valueOf(c.getId());
+        }else{
+            condicion = "nom=" + "'" + c.getNom() + "'";
+        }
 
         String[] columnas = {
                 "id","nom","email","web","idAdmin"

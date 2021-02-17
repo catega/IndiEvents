@@ -1,5 +1,6 @@
 package com.example.indievents;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -90,6 +92,40 @@ public class StudioPerfilFragment extends Fragment {
         TextView txtEmail = (TextView)v.findViewById(R.id.txtStudioEmail);
         txtWeb.setText(studio.getWeb());
         txtEmail.setText(studio.getEmail());
+
+        Button btnUnirse = (Button)v.findViewById(R.id.btnUnirseStudio);
+        btnUnirse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                user.setStudio(studio);
+                ieo.actualizarUsuario(user);
+
+                Intent intent = new Intent(getActivity(), PerfilActivity.class);
+                intent.putExtra("user", user);
+                startActivity(intent);
+            }
+        });
+
+        if (!user.isDev() || (user.isDev() && user.getStudio() != null))
+            btnUnirse.setVisibility(View.GONE);
+
+        Button btnRegistrarGame = (Button)v.findViewById(R.id.btnRegistrarJoc);
+        btnRegistrarGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("user", user);
+                bundle.putSerializable("studio", studio);
+
+                Intent intent = new Intent(getActivity(), GameActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+        if (studio.getStudioAdmin() != user.getId())
+            btnRegistrarGame.setVisibility(View.GONE);
 
         RecyclerView lstDevs = (RecyclerView)v.findViewById(R.id.lstStudioDevs);
         lstDevs.setAdapter(new UsersStudioAdapter(this, studio.getDevelopers(), R.layout.item_user_studio));

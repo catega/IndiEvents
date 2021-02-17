@@ -16,12 +16,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.indievents.pojo.Studio;
 import com.example.indievents.pojo.User;
 import com.google.android.material.navigation.NavigationView;
 
 public class StudiosActivity extends AppCompatActivity {
 
     User user;
+    int frg;
     boolean cambiarBoto = true;
     NavigationView nav;
     ActionBarDrawerToggle toggle;
@@ -33,6 +35,7 @@ public class StudiosActivity extends AppCompatActivity {
         setContentView(R.layout.activity_studios);
 
         user = (User)getIntent().getSerializableExtra("user");
+        frg = getIntent().getIntExtra("fragment", 0);
 
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbarPrincipal);
         setSupportActionBar(toolbar);
@@ -93,7 +96,16 @@ public class StudiosActivity extends AppCompatActivity {
 
         final Bundle bundle = new Bundle();
         bundle.putSerializable("user", user);
-        Fragment fragment = new StudiosListaFragment();
+
+        Fragment fragment;
+
+        if (frg == 0)
+            fragment = new StudiosListaFragment();
+        else{
+            bundle.putSerializable("studio", (Studio)getIntent().getSerializableExtra("studio"));
+            fragment = new StudioPerfilFragment();
+        }
+
         fragment.setArguments(bundle);
 
         getSupportFragmentManager().beginTransaction().add(R.id.studios_container, fragment).commit();

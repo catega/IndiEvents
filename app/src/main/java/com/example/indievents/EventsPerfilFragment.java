@@ -1,5 +1,6 @@
 package com.example.indievents;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -18,6 +20,7 @@ import com.example.indievents.db.IndiEventsOperacional;
 import com.example.indievents.pojo.Event;
 import com.example.indievents.pojo.User;
 
+import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -91,9 +94,53 @@ public class EventsPerfilFragment extends Fragment {
         txtFechaInici.setText(event.getFechaIniciString());
         txtFechaFinal.setText(event.getFechaFinalString());
 
+        Button btnUnirse = (Button)v.findViewById(R.id.btnUnirseUser);
+        btnUnirse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ieo.apuntarUserEvent(user, event);
+
+                Intent intent = new Intent(getActivity().getApplicationContext(), PerfilActivity.class);
+                intent.putExtra("user", user);
+                startActivity(intent);
+            }
+        });
+
+        try {
+            if (ieo.comprobarRegistroUserEvento(user, event))
+                btnUnirse.setVisibility(View.GONE);
+            else if (!user.isDev())
+                btnUnirse.setVisibility(View.GONE);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Button btnUnirStudio = (Button)v.findViewById(R.id.btnUnirseStudio);
+        btnUnirStudio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ieo.apuntarStudioEvent(user, event);
+
+                Intent intent = new Intent(getActivity().getApplicationContext(), PerfilActivity.class);
+                intent.putExtra("user", user);
+                startActivity(intent);
+            }
+        });
+
+        try {
+            if (user.isDev()) {
+                if (ieo.comprobarRegistroStudioEvento(user, event) || (user.getStudio().getStudioAdmin() != user.getId()))
+                    btnUnirStudio.setVisibility(View.GONE);
+            }else
+                btnUnirStudio.setVisibility(View.GONE);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         /*RecyclerView lstStudios = (RecyclerView)v.findViewById(R.id.lstEventStudios);
         lstStudios.setAdapter(new StudiosAdapter(this, event.getStudiosParticipants(), R.layout.item_studio));
         lstStudios.setLayoutManager(new LinearLayoutManager(this.getActivity()));*/
+
         RecyclerView lstUsers = (RecyclerView)v.findViewById(R.id.lstEventDevs);
         lstUsers.setAdapter(new UsersEventAdapter(this, event.getDevelopersParticipants(), R.layout.item_user_event));
         lstUsers.setLayoutManager(new LinearLayoutManager(this.getActivity()));

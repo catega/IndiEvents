@@ -44,8 +44,9 @@
         app:layout_constraintTop_toBottomOf="@+id/edtGameDescripcion" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="0dp"
-        android:layout_height="500dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
@@ -192,5 +193,26 @@
             android:text="Survival"
             app:layout_constraintStart_toEndOf="@+id/chkShooter"
             app:layout_constraintTop_toBottomOf="@+id/chkPlataformas" />
+
+        <CheckBox
+            android:id="@+id/chkPuzzles"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Puzzles"
+            app:layout_constraintStart_toEndOf="@+id/chkPlataformas"
+            app:layout_constraintTop_toBottomOf="@+id/chkMetroidvania" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/btnRegistrarJoc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/buttons"
+        android:text="Añadir"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 </androidx.constraintlayout.widget.ConstraintLayout>

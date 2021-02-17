@@ -104,7 +104,13 @@ public class PerfilActivity extends AppCompatActivity {
 
         if (user.isDev()){
             txtRango.setText("Dev");
-            txtStudio.setText(user.getStudio().getNom());
+            if (user.getStudio() != null)
+                txtStudio.setText(user.getStudio().getNom());
+            else
+                txtStudio.setText("Independiente");
+        } else if(user.isOrganitzador()){
+            txtRango.setText("Organizador");
+            txtStudio.setText("IndiEvents");
         }
 
         txtUsername.setText(user.getUsername());

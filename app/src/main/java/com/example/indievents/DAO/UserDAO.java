@@ -23,7 +23,7 @@ public class UserDAO implements PojoDAO{
         contentValues.put("email", c.getEmail());
         contentValues.put("dev", c.isDev() ? 1 : 0);
         contentValues.put("organizador", 0);
-        contentValues.putNull("idStudio");
+        contentValues.put("idStudio", 0);
         return MiBD.getDB().insert("users", null, contentValues);
     }
 
@@ -36,6 +36,9 @@ public class UserDAO implements PojoDAO{
         contentValues.put("username", c.getUsername());
         contentValues.put("password", c.getPassword());
         contentValues.put("email", c.getEmail());
+        contentValues.put("dev", c.isDev() ? 1 : 0);
+        contentValues.put("organizador", c.isOrganitzador() ? 1 : 0);
+        contentValues.put("idStudio", c.getStudio().getId());
 
         String condicion = "id=" + String.valueOf(c.getId());
 
@@ -81,10 +84,12 @@ public class UserDAO implements PojoDAO{
             nuevoUser.setOrganitzador(cursor.getInt(6) != 0);
 
             // Obtenemos el studio y lo asignamos
-            Studio a = new Studio();
-            a.setId(cursor.getInt(7));
-            a = (Studio) MiBD.getInstance(null).getStudioDAO().search(a);
-            nuevoUser.setStudio(a);
+            if (cursor.getInt(7) != 0){
+                Studio a = new Studio();
+                a.setId(cursor.getInt(7));
+                a = (Studio) MiBD.getInstance(null).getStudioDAO().search(a);
+                nuevoUser.setStudio(a);
+            }
 
             // Obtenemos la lista de events que tiene el studio
             nuevoUser.setEventosEnSolitari(MiBD.getInstance(null).getEventUserDAO().getEvents(nuevoUser));
@@ -114,10 +119,12 @@ public class UserDAO implements PojoDAO{
                 nuevoUser.setOrganitzador(cursor.getInt(6) != 0);
 
                 // Obtenemos el studio y lo asignamos
-                Studio a = new Studio();
-                a.setId(cursor.getInt(6));
-                a = (Studio) MiBD.getInstance(null).getStudioDAO().search(a);
-                nuevoUser.setStudio(a);
+                if (cursor.getInt(7) != 0){
+                    Studio a = new Studio();
+                    a.setId(cursor.getInt(7));
+                    a = (Studio) MiBD.getInstance(null).getStudioDAO().search(a);
+                    nuevoUser.setStudio(a);
+                }
 
                 // Obtenemos la lista de events que tiene el studio
                 nuevoUser.setEventosEnSolitari(MiBD.getInstance(null).getEventUserDAO().getEvents(nuevoUser));

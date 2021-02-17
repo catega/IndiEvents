@@ -53,9 +53,9 @@ public class EventUserDAO implements PojoDAO{
 
     @Override
     public Object search(Object obj) throws ParseException {
-        EventStudio e = (EventStudio) obj;
+        EventUser e = (EventUser) obj;
 
-        String condicion = "idEvent=" + String.valueOf(e.getIdEvent());
+        String condicion = "idEvent=" + String.valueOf(e.getIdEvent()) + " AND idUser=" + String.valueOf(e.getIdUser());
 
         String[] columnas = {
                 "idEvent","idUser"
