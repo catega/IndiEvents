@@ -112,6 +112,10 @@ public class IndiEventsOperacional implements Serializable {
         return (User)miBD.getUserDAO().search(u);
     }
 
+    public void crearEvent(Event e){
+        miBD.getEventDAO().add(e);
+    }
+
     // Operacion changePassword: Cambia la password del cliente. Recibirá el cliente de la aplicación con la password cambiada.
     // Si devuelve un 1 es que ha verificado el cambio de password como correcto y todo ha ido bien, mientras que si devuelve
     // mientras que si devuelve un 0 no ha verificado el cambio de password como correcto y ha habido un error al cambiarlo.

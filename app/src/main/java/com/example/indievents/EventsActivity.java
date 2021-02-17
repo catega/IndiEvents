@@ -83,19 +83,9 @@ public class EventsActivity extends AppCompatActivity {
         btnCrearEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (cambiarBoto){
-                    btnCrearEvent.setText("Cancelar");
-                    Fragment fragment = new CrearEventFragment();
-                    fragment.setArguments(bundle);
-                    getSupportFragmentManager().beginTransaction().replace(R.id.events_container, fragment).commit();
-                }else{
-                    btnCrearEvent.setText("Crear evento");
-                    Fragment fragment = new EventsListaFragment();
-                    fragment.setArguments(bundle);
-                    getSupportFragmentManager().beginTransaction().replace(R.id.events_container, fragment).commit();
-                }
-
-                cambiarBoto = !cambiarBoto;
+                Intent intent = new Intent(EventsActivity.this, CrearEventActivity.class);
+                intent.putExtra("user", user);
+                startActivity(intent);
             }
         });
 

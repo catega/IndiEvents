@@ -18,6 +18,17 @@ public class Event implements Serializable {
     public Event(){
     }
 
+    public Event(String nom, String descripcio, String web, String fechaInici, String fechaFinal, int idAdmin) throws ParseException {
+        this.nom = nom;
+        this.descripcio = descripcio;
+        this.fechaInici = dateFormat.parse(fechaInici);
+        this.fechaFinal = dateFormat.parse(fechaFinal);
+        this.web = web;
+        this.studiosParticipants = new ArrayList<>();
+        this.developersParticipants = new ArrayList<>();
+        this.idAdmin = idAdmin;
+    }
+
     public Event(int id, String nom, String descripcio, String web, String fechaInici, String fechaFinal, int idAdmin) throws ParseException {
         this.id = id;
         this.nom = nom;
