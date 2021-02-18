@@ -1,14 +1,18 @@
 package com.example.indievents.adapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -38,10 +42,38 @@ public class UsersEventAdapter extends RecyclerView.Adapter<UsersEventAdapter.Vi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull UsersEventAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull UsersEventAdapter.ViewHolder holder, final int position) {
         holder.txtUser.setText(users.get(position).getUsername());
         holder.txtUserName.setText(users.get(position).getNom());
         holder.txtUserStudio.setText(users.get(position).getStudio().getNom());
+
+        holder.userLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(v.getRootView().getContext());
+                View dialogView = LayoutInflater.from(v.getRootView().getContext()).inflate(R.layout.user_dialog, null);
+
+                TextView txtUserDialogUsername = (TextView)dialogView.findViewById(R.id.txtUserDialogUsername);
+                TextView txtUserDialogNom = (TextView)dialogView.findViewById(R.id.txtUserDialogNom);
+                TextView txtUserDialogEmail = (TextView)dialogView.findViewById(R.id.txtUserDialogEmail);
+                TextView txtUserDialogStudio = (TextView)dialogView.findViewById(R.id.txtUserDialogStudio);
+                ImageView imgUser = (ImageView)dialogView.findViewById(R.id.imgUserDialog);
+
+                txtUserDialogUsername.setText(users.get(position).getUsername());
+                txtUserDialogNom.setText(users.get(position).getNom());
+                txtUserDialogEmail.setText(users.get(position).getEmail());
+                imgUser.setImageResource(R.drawable.ic_baseline_account_circle_24);
+
+                if (users.get(position).getStudio() == null)
+                    txtUserDialogStudio.setText("Independiente");
+                else
+                    txtUserDialogStudio.setText(users.get(position).getStudio().getNom());
+
+                builder.setView(dialogView);
+                builder.setCancelable(true);
+                builder.show();
+            }
+        });
     }
 
     @Override
@@ -51,12 +83,15 @@ public class UsersEventAdapter extends RecyclerView.Adapter<UsersEventAdapter.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView txtUser, txtUserName, txtUserStudio;
+        ConstraintLayout userLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtUser = itemView.findViewById(R.id.txtUserEvent);
             txtUserName = itemView.findViewById(R.id.txtUserNomEvent);
             txtUserStudio = itemView.findViewById(R.id.txtUserStudioEvent);
+
+            userLayout = itemView.findViewById(R.id.userEventLayout);
         }
     }
 }

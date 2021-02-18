@@ -5,9 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -37,10 +39,17 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull GamesAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull GamesAdapter.ViewHolder holder, final int position) {
         holder.txtTitul.setText(games.get(position).getTitul());
         holder.txtDescripcio.setText(games.get(position).getDescripcio());
         holder.txtGeneres.setText(games.get(position).getGeneres());
+
+        holder.gameLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, games.get(position).getTitul(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     @Override
@@ -50,12 +59,15 @@ public class GamesAdapter extends RecyclerView.Adapter<GamesAdapter.ViewHolder> 
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView txtTitul, txtDescripcio, txtGeneres;
+        ConstraintLayout gameLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtTitul = itemView.findViewById(R.id.txtGameNom);
             txtDescripcio = itemView.findViewById(R.id.txtGameDescripcio);
             txtGeneres = itemView.findViewById(R.id.txtGamesGeneres);
+
+            gameLayout = itemView.findViewById(R.id.gameLayout);
         }
     }
 }

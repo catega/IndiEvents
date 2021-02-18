@@ -6,9 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -39,10 +41,17 @@ public class EventsAdapterPerfilsActivity extends RecyclerView.Adapter<EventsAda
     }
 
     @Override
-    public void onBindViewHolder(@NonNull EventsAdapterPerfilsActivity.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull EventsAdapterPerfilsActivity.ViewHolder holder, final int position) {
         holder.txtNom.setText(events.get(position).getNom());
         holder.txtFechaInici.setText(events.get(position).getFechaIniciString());
         holder.txtFechaFinal.setText(events.get(position).getFechaFinalString());
+
+        holder.eventLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, events.get(position).getNom(), Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     @Override
@@ -52,12 +61,14 @@ public class EventsAdapterPerfilsActivity extends RecyclerView.Adapter<EventsAda
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView txtNom, txtFechaInici, txtFechaFinal;
+        ConstraintLayout eventLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtNom = itemView.findViewById(R.id.txtEventNomPerfils);
             txtFechaInici = itemView.findViewById(R.id.txtEventFechaIniciPerfils);
             txtFechaFinal = itemView.findViewById(R.id.txtEventFechaFinalPerfils);
+            eventLayout = itemView.findViewById(R.id.eventPerfilLayout);
         }
     }
 }

@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.indievents.adapters.StudiosAdapter;
+import com.example.indievents.adapters.StudiosPerfilAdapter;
 import com.example.indievents.adapters.UsersEventAdapter;
 import com.example.indievents.db.IndiEventsOperacional;
 import com.example.indievents.pojo.Event;
@@ -137,9 +138,9 @@ public class EventsPerfilFragment extends Fragment {
             e.printStackTrace();
         }
 
-        /*RecyclerView lstStudios = (RecyclerView)v.findViewById(R.id.lstEventStudios);
-        lstStudios.setAdapter(new StudiosAdapter(this, event.getStudiosParticipants(), R.layout.item_studio));
-        lstStudios.setLayoutManager(new LinearLayoutManager(this.getActivity()));*/
+        RecyclerView lstStudios = (RecyclerView)v.findViewById(R.id.lstEventStudios);
+        lstStudios.setAdapter(new StudiosPerfilAdapter(this, event.getStudiosParticipants(), R.layout.item_studio_perfil));
+        lstStudios.setLayoutManager(new LinearLayoutManager(this.getActivity()));
 
         RecyclerView lstUsers = (RecyclerView)v.findViewById(R.id.lstEventDevs);
         lstUsers.setAdapter(new UsersEventAdapter(this, event.getDevelopersParticipants(), R.layout.item_user_event));

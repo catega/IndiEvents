@@ -74,7 +74,7 @@ public class StudioDAO implements PojoDAO{
             nuevoStudio.setNom(cursor.getString(1));
             nuevoStudio.setEmail(cursor.getString(2));
             nuevoStudio.setWeb(cursor.getString(3));
-            c.setStudioAdmin(cursor.getInt(4));
+            nuevoStudio.setStudioAdmin(cursor.getInt(4));
 
             // Obtenemos la lista de users que tiene el studio
             nuevoStudio.setDevelopers(MiBD.getInstance(null).getUserDAO().getUsers(nuevoStudio));

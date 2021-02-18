@@ -70,6 +70,10 @@ public class IndiEventsOperacional implements Serializable {
         miBD.getUserDAO().update(u);
     }
 
+    public Studio studioPerfil(Studio s) throws ParseException {
+        return (Studio)miBD.getStudioDAO().search(s);
+    }
+
     public void actualizarUsuario(User u){
         miBD.getUserDAO().update(u);
     }
@@ -109,6 +113,16 @@ public class IndiEventsOperacional implements Serializable {
     }
 
     public User userUpdated(User u) throws ParseException {
+        return (User)miBD.getUserDAO().search(u);
+    }
+
+    public ArrayList<Event> eventosCreats(User u) throws ParseException {
+        return miBD.getEventDAO().getAllIdAdmin(u);
+    }
+
+    public User buscarUser(int id) throws ParseException {
+        User u = new User();
+        u.setId(id);
         return (User)miBD.getUserDAO().search(u);
     }
 

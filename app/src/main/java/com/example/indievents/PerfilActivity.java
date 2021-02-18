@@ -20,8 +20,11 @@ import android.widget.TextView;
 import com.example.indievents.adapters.EventsAdapterPerfils;
 import com.example.indievents.adapters.EventsAdapterPerfilsActivity;
 import com.example.indievents.adapters.StudiosAdapter;
+import com.example.indievents.db.IndiEventsOperacional;
 import com.example.indievents.pojo.User;
 import com.google.android.material.navigation.NavigationView;
+
+import java.text.ParseException;
 
 public class PerfilActivity extends AppCompatActivity {
     User user;
@@ -35,6 +38,7 @@ public class PerfilActivity extends AppCompatActivity {
         setContentView(R.layout.activity_perfil);
 
         user = (User)getIntent().getSerializableExtra("user");
+        final IndiEventsOperacional ieo = IndiEventsOperacional.getInstance(this);
 
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbarPrincipal);
         setSupportActionBar(toolbar);
@@ -97,21 +101,48 @@ public class PerfilActivity extends AppCompatActivity {
         TextView txtName = (TextView)findViewById(R.id.txtNom);
         TextView txtEmail = (TextView)findViewById(R.id.txtEmail);
         TextView txtStudio = (TextView)findViewById(R.id.txtStudioNom);
+        TextView txtEvents = (TextView)findViewById(R.id.txtEventsUserLabel);
+
+
+        txtStudio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("user", user);
+                bundle.putInt("fragment", 1);
+                try {
+                    bundle.putSerializable("studio", ieo.studioPerfil(user.getStudio()));
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                Intent intent = new Intent(PerfilActivity.this, StudiosActivity.class);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
 
         RecyclerView listaEventos = (RecyclerView)findViewById(R.id.lstEventosUser);
-        listaEventos.setAdapter(new EventsAdapterPerfilsActivity(this, user.getEventosEnSolitari(), R.layout.item_events_perfils));
-        listaEventos.setLayoutManager(new LinearLayoutManager(this));
 
         if (user.isDev()){
             txtRango.setText("Dev");
+            listaEventos.setAdapter(new EventsAdapterPerfilsActivity(this, user.getEventosEnSolitari(), R.layout.item_events_perfils));
             if (user.getStudio() != null)
                 txtStudio.setText(user.getStudio().getNom());
             else
                 txtStudio.setText("Independiente");
         } else if(user.isOrganitzador()){
+            try {
+                listaEventos.setAdapter(new EventsAdapterPerfilsActivity(this, ieo.eventosCreats(user), R.layout.item_events_perfils));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             txtRango.setText("Organizador");
             txtStudio.setText("IndiEvents");
+            txtEvents.setText("Eventos creados:");
         }
+
+        listaEventos.setLayoutManager(new LinearLayoutManager(this));
+
 
         txtUsername.setText(user.getUsername());
         txtName.setText("'" + user.getNom() + "'");
@@ -130,7 +161,7 @@ public class PerfilActivity extends AppCompatActivity {
         Intent intent = null;
         switch (item.getItemId()){
             case R.id.menuEventos:
-                //intent = new Intent(PerfilActivity.this, EventosActivity.class);
+                intent = new Intent(PerfilActivity.this, EventsActivity.class);
                 break;
             case R.id.menuStudios:
                 intent = new Intent(PerfilActivity.this, StudiosActivity.class);
