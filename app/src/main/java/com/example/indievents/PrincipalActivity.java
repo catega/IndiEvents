@@ -83,6 +83,9 @@ public class PrincipalActivity extends AppCompatActivity {
                         break;
                     case R.id.menuJams:
                         break;
+                    case R.id.menuMaps:
+                        startActivity(new Intent(PrincipalActivity.this, MapsActivity.class));
+                        break;
                     case R.id.menuLogOut:
                         FirebaseAuth.getInstance().signOut();
                         startActivity(new Intent(PrincipalActivity.this, MainActivity.class));

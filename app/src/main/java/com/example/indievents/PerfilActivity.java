@@ -86,6 +86,9 @@ public class PerfilActivity extends AppCompatActivity {
                         break;
                     case R.id.menuJams:
                         break;
+                    case R.id.menuMaps:
+                        startActivity(new Intent(PerfilActivity.this, MapsActivity.class));
+                        break;
                     case R.id.menuLogOut:
                         FirebaseAuth.getInstance().signOut();
                         startActivity(new Intent(PerfilActivity.this, MainActivity.class));
