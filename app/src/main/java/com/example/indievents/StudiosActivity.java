@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.example.indievents.pojo.Studio;
 import com.example.indievents.pojo.User;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class StudiosActivity extends AppCompatActivity {
 
@@ -79,6 +80,12 @@ public class StudiosActivity extends AppCompatActivity {
                         break;
                     case R.id.menuPerfil:
                         intent = new Intent(getBaseContext(), PerfilActivity.class);
+                        break;
+                    case R.id.menuJams:
+                        break;
+                    case R.id.menuLogOut:
+                        FirebaseAuth.getInstance().signOut();
+                        startActivity(new Intent(StudiosActivity.this, MainActivity.class));
                         break;
                 }
 

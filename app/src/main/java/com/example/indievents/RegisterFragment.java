@@ -3,8 +3,10 @@ package com.example.indievents;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +17,12 @@ import android.widget.Toast;
 
 import com.example.indievents.db.IndiEventsOperacional;
 import com.example.indievents.pojo.User;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.ktx.Firebase;
 
 import java.text.ParseException;
 
@@ -33,6 +41,8 @@ public class RegisterFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private FirebaseAuth mAuth;
 
     EditText edtUsername;
     EditText edtNom;
@@ -79,6 +89,8 @@ public class RegisterFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_register, container, false);
 
+        mAuth = FirebaseAuth.getInstance();
+
         ieo = IndiEventsOperacional.getInstance(this.getActivity().getApplicationContext());
 
         edtNom = (EditText)v.findViewById(R.id.edtName);
@@ -91,25 +103,39 @@ public class RegisterFragment extends Fragment {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                User nuevoUser = new User();
 
-                nuevoUser.setUsername(edtUsername.getText().toString());
-                nuevoUser.setNom(edtNom.getText().toString());
-                nuevoUser.setPassword(edtPass.getText().toString());
-                nuevoUser.setEmail(edtEmail.getText().toString());
-                nuevoUser.setDev(chkDev.isChecked());
+                if (Patterns.EMAIL_ADDRESS.matcher(edtEmail.getText().toString()).matches()){
+                    if (edtPass.getText().toString().length() >= 6){
 
-                try {
-                    if (ieo.comprobarRegistro(nuevoUser) == null){
-                        ieo.registrarUsuario(nuevoUser);
+                        mAuth.createUserWithEmailAndPassword(edtEmail.getText().toString(), edtPass.getText().toString())
+                                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                        if (task.isSuccessful()){
+                                            User nuevoUser = new User();
+                                            nuevoUser.setUsername(edtUsername.getText().toString());
+                                            nuevoUser.setNom(edtNom.getText().toString());
+                                            nuevoUser.setPassword(edtPass.getText().toString());
+                                            nuevoUser.setEmail(edtEmail.getText().toString());
+                                            nuevoUser.setDev(chkDev.isChecked());
 
-                        Intent intent = new Intent(getActivity(), PrincipalActivity.class);
-                        intent.putExtra("user", ieo.comprobarRegistro(nuevoUser));
-                        startActivity(intent);
-                    }else
-                        Toast.makeText(getActivity().getApplicationContext(), "El usuario ya existe", Toast.LENGTH_LONG).show();
-                } catch (ParseException e) {
-                    e.printStackTrace();
+                                            ieo.registrarUsuario(nuevoUser);
+
+                                            Toast.makeText(getActivity(), "Usuario registrado correctamente", Toast.LENGTH_LONG).show();
+
+                                            Intent intent = new Intent(getActivity(), PrincipalActivity.class);
+                                            intent.putExtra("user", nuevoUser);
+                                            startActivity(intent);
+                                        }
+                                    }
+                                });
+                    }else {
+                        edtPass.setError("La contraseña debe tener 6 carácteres como mínimo");
+                        edtPass.requestFocus();
+                    }
+                }else{
+                    edtEmail.setError("Introduce un email válido");
+                    edtEmail.requestFocus();
                 }
             }
         });

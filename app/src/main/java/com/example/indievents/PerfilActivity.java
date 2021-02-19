@@ -23,6 +23,7 @@ import com.example.indievents.adapters.StudiosAdapter;
 import com.example.indievents.db.IndiEventsOperacional;
 import com.example.indievents.pojo.User;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.text.ParseException;
 
@@ -82,6 +83,12 @@ public class PerfilActivity extends AppCompatActivity {
                         break;
                     case R.id.menuPerfil:
                         intent = new Intent(getBaseContext(), PerfilActivity.class);
+                        break;
+                    case R.id.menuJams:
+                        break;
+                    case R.id.menuLogOut:
+                        FirebaseAuth.getInstance().signOut();
+                        startActivity(new Intent(PerfilActivity.this, MainActivity.class));
                         break;
                 }
 

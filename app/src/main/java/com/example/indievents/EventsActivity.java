@@ -14,9 +14,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.indievents.pojo.User;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class EventsActivity extends AppCompatActivity {
 
@@ -44,6 +46,20 @@ public class EventsActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
+        View v = nav.getHeaderView(0);
+
+        TextView txtUser = (TextView)v.findViewById(R.id.txtUserMenu);
+        TextView txtStudioV = (TextView)v.findViewById(R.id.txtStudioMenu);
+
+        txtUser.setText(user.getUsername());
+
+        if (user.isDev() && user.getStudio() != null)
+            txtStudioV.setText(user.getStudio().getNom());
+        else if (user.isDev() && user.getStudio() == null)
+            txtStudioV.setText("Independiente");
+        else
+            txtStudioV.setText("IndiEvents");
+
         nav.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -58,6 +74,12 @@ public class EventsActivity extends AppCompatActivity {
                         break;
                     case R.id.menuPerfil:
                         intent = new Intent(getBaseContext(), PerfilActivity.class);
+                        break;
+                    case R.id.menuJams:
+                        break;
+                    case R.id.menuLogOut:
+                        FirebaseAuth.getInstance().signOut();
+                        startActivity(new Intent(EventsActivity.this, MainActivity.class));
                         break;
                 }
 

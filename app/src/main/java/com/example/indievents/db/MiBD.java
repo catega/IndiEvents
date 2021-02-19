@@ -20,7 +20,7 @@ public class MiBD extends SQLiteOpenHelper implements Serializable {
     //nombre de la base de datos
     private static final String database = "IndiEvents";
     //versión de la base de datos
-    private static final int version = 7;
+    private static final int version = 8;
     //Instrucción SQL para crear la tabla de Users
     private String sqlCreacionUsers = "CREATE TABLE users ( id INTEGER PRIMARY KEY AUTOINCREMENT, nom STRING, username STRING, " +
             "password STRING, email STRING, dev INTEGER DEFAULT 0, organizador INTEGER DEFAULT 0, idStudio INTEGER);";
@@ -159,10 +159,10 @@ public class MiBD extends SQLiteOpenHelper implements Serializable {
 
     private void insercionDatos(SQLiteDatabase db){
         // Insertamos los users
-        db.execSQL("INSERT INTO users(id, nom, username, password, email, dev, organizador, idStudio) VALUES (1, 'Carlos Teruel Garcia', 'Katega', '1234', 'cartegar@gmail.com', 1, 0, 1);");
-        db.execSQL("INSERT INTO users(id, nom, username, password, email, dev, organizador, idStudio) VALUES (2, 'Dragos Bogdan', 'Dragos', '1234', 'dragos@gmail.com', 1, 0, 1);");
-        db.execSQL("INSERT INTO users(id, nom, username, password, email, dev, organizador, idStudio) VALUES (3, 'Bisan Teeko', 'Teeko', '1234', 'bisanteeko@gmail.com', 1, 0, 2);");
-        db.execSQL("INSERT INTO users(id, nom, username, password, email, dev, organizador, idStudio) VALUES (4, 'Alva Majo', 'Alva', '1234', 'alva@gmail.com', 0, 1, 0);");
+        db.execSQL("INSERT INTO users(id, nom, username, password, email, dev, organizador, idStudio) VALUES (1, 'Carlos Teruel Garcia', 'Katega', '123456', 'cartegar@gmail.com', 1, 0, 1);");
+        db.execSQL("INSERT INTO users(id, nom, username, password, email, dev, organizador, idStudio) VALUES (2, 'Dragos Bogdan', 'Dragos', '123456', 'dragos@gmail.com', 1, 0, 1);");
+        db.execSQL("INSERT INTO users(id, nom, username, password, email, dev, organizador, idStudio) VALUES (3, 'Bisan Teeko', 'Teeko', '123456', 'bisanteeko@gmail.com', 1, 0, 2);");
+        db.execSQL("INSERT INTO users(id, nom, username, password, email, dev, organizador, idStudio) VALUES (4, 'Alva Majo', 'Alva', '123456', 'alva@gmail.com', 0, 1, 0);");
 
         // Insertamos los studios
         db.execSQL("INSERT INTO studios (id, nom, email, web, idAdmin) VALUES (1, 'Badana Tales', 'badanatales@gmail.com', 'www.badanatales.com', 1);");

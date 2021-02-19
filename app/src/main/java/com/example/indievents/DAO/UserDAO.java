@@ -61,10 +61,10 @@ public class UserDAO implements PojoDAO{
         User c = (User) obj;
 
         String condicion = "";
-        if(TextUtils.isEmpty(c.getUsername())){
+        if(TextUtils.isEmpty(c.getEmail())){
             condicion = "id=" + String.valueOf(c.getId());
         }else{
-            condicion = "username=" + "'" + c.getUsername() + "'";
+            condicion = "email=" + "'" + c.getEmail() + "'";
         }
 
         String[] columnas = {

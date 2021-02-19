@@ -13,4 +13,12 @@
         android:id="@+id/menuPerfil"
         android:icon="@drawable/ic_baseline_account_circle_24"
         android:title="Perfil" />
+    <item
+        android:id="@+id/menuJams"
+        android:icon="@drawable/ic_baseline_emoji_events_24"
+        android:title="itch.io Jams" />
+    <item
+        android:id="@+id/menuLogOut"
+        android:icon="@drawable/ic_baseline_exit_to_app_24"
+        android:title="Log out" />
 </menu>

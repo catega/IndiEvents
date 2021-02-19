@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "661235585399",
+    "project_id": "indievents-24bed",
+    "storage_bucket": "indievents-24bed.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:661235585399:android:1e7280431e7df09f469172",
+        "android_client_info": {
+          "package_name": "com.example.indievents"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "661235585399-m8k4bj0oeuoc4sik267rrjratmvcmjq8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAusP4tFxKL1GFYG37POK0LqUzv-ghP_JI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "661235585399-m8k4bj0oeuoc4sik267rrjratmvcmjq8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
