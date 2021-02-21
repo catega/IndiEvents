@@ -9,7 +9,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -81,7 +80,8 @@ public class PrincipalActivity extends AppCompatActivity {
                     case R.id.menuPerfil:
                         intent = new Intent(getBaseContext(), PerfilActivity.class);
                         break;
-                    case R.id.menuJams:
+                    case R.id.menuNews:
+                        intent = new Intent(PrincipalActivity.this, NoticiasActivity.class);
                         break;
                     case R.id.menuMaps:
                         startActivity(new Intent(PrincipalActivity.this, MapsActivity.class));

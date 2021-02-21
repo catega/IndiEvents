@@ -75,7 +75,8 @@ public class EventsActivity extends AppCompatActivity {
                     case R.id.menuPerfil:
                         intent = new Intent(getBaseContext(), PerfilActivity.class);
                         break;
-                    case R.id.menuJams:
+                    case R.id.menuNews:
+                        intent = new Intent(getBaseContext(), NoticiasActivity.class);
                         break;
                     case R.id.menuMaps:
                         startActivity(new Intent(EventsActivity.this, MapsActivity.class));

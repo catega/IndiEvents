@@ -14,9 +14,9 @@
         android:icon="@drawable/ic_baseline_account_circle_24"
         android:title="Perfil" />
     <item
-        android:id="@+id/menuJams"
-        android:icon="@drawable/ic_baseline_emoji_events_24"
-        android:title="itch.io Jams" />
+        android:id="@+id/menuNews"
+        android:icon="@drawable/ic_baseline_announcement_24"
+        android:title="Noticias" />
     <item
         android:id="@+id/menuMaps"
         android:icon="@drawable/ic_baseline_map_24"

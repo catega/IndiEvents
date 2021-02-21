@@ -1,5 +1,6 @@
 package com.example.indievents.adapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,7 +50,29 @@ public class EventsAdapterPerfilsActivity extends RecyclerView.Adapter<EventsAda
         holder.eventLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, events.get(position).getNom(), Toast.LENGTH_LONG).show();
+                AlertDialog.Builder builder = new AlertDialog.Builder(v.getRootView().getContext());
+                View dialogView = LayoutInflater.from(v.getRootView().getContext()).inflate(R.layout.event_dialog, null);
+
+                TextView txtEventDialogNom = (TextView)dialogView.findViewById(R.id.txtEventDialogNom);
+                TextView txtEventDialogDesc = (TextView)dialogView.findViewById(R.id.txtEventDialogDesc);
+                TextView txtEventDialogWeb = (TextView)dialogView.findViewById(R.id.txtEventDialogWeb);
+                TextView txtEventDialogFechaIniciLabel = (TextView)dialogView.findViewById(R.id.txtEventDialogFechaIniciLabel);
+                TextView txtEventDialogFechaInici = (TextView)dialogView.findViewById(R.id.txtEventDialogFechaInici);
+                TextView txtEventDialogFechaFinalLabel = (TextView)dialogView.findViewById(R.id.txtEventDialogFechaFinalLabel);
+                TextView txtEventDialogFechaFinal = (TextView)dialogView.findViewById(R.id.txtEventDialogFechaFinal);
+
+                txtEventDialogNom.setText(events.get(position).getNom());
+                txtEventDialogDesc.setText(events.get(position).getDescripcio());
+                txtEventDialogWeb.setText(events.get(position).getWeb());
+                txtEventDialogFechaIniciLabel.setText("Fecha inicio:");
+                txtEventDialogFechaInici.setText(events.get(position).getFechaIniciString());
+                txtEventDialogFechaFinalLabel.setText("Fecha final:");
+                txtEventDialogFechaFinal.setText(events.get(position).getFechaFinalString());
+
+
+                builder.setView(dialogView);
+                builder.setCancelable(true);
+                builder.show();
             }
         });
     }
