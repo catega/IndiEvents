@@ -123,7 +123,7 @@ public class PrincipalActivity extends AppCompatActivity {
         Intent intent = null;
         switch (item.getItemId()){
             case R.id.menuSettings:
-                intent = new Intent(PrincipalActivity.this, EventsActivity.class);
+                intent = new Intent(getBaseContext(), OpcionesActivity.class);
                 break;
         }
 

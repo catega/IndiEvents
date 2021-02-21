@@ -148,13 +148,13 @@ public class NoticiasActivity extends AppCompatActivity {
                     recyclerView.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
                 }else{
-                    Toast.makeText(NoticiasActivity.this, "No results", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getBaseContext(), "No results", Toast.LENGTH_LONG).show();
                 }
             }
 
             @Override
             public void onFailure(Call<News> call, Throwable t) {
-
+                Toast.makeText(getBaseContext(), "No hay conexión con la API", Toast.LENGTH_LONG).show();
             }
         });
     }

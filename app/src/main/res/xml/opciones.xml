@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="Idioma">
+        <ListPreference
+            android:key="idioma"
+            android:title="Idioma por defecto"
+            android:summary="Idioma por defecto de la aplicación"
+            android:dialogTitle="Idioma por defecto"
+            android:entries="@array/idioma"
+            android:entryValues="@array/idiomaCodigo"/>
+    </PreferenceCategory>
+</PreferenceScreen>

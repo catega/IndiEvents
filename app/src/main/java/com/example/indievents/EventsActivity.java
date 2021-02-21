@@ -38,6 +38,9 @@ public class EventsActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbarPrincipal);
         setSupportActionBar(toolbar);
 
+        TextView txtTitle = (TextView)findViewById(R.id.txtTitle);
+        txtTitle.setText(R.string.app_events);
+
         nav = (NavigationView)findViewById(R.id.navmenu);
         drawerLayout = (DrawerLayout)findViewById(R.id.drawer);
 
@@ -130,7 +133,7 @@ public class EventsActivity extends AppCompatActivity {
         Intent intent = null;
         switch (item.getItemId()){
             case R.id.menuSettings:
-                intent = new Intent(EventsActivity.this, EventsActivity.class);
+                intent = new Intent(getBaseContext(), OpcionesActivity.class);
                 break;
         }
 

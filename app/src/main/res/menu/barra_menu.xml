@@ -4,25 +4,25 @@
     <item
         android:id="@+id/menuEventos"
         android:icon="@drawable/ic_baseline_event_24"
-        android:title="Eventos" />
+        android:title="@string/app_events" />
     <item
         android:id="@+id/menuStudios"
         android:icon="@drawable/ic_baseline_code_24"
-        android:title="Studios" />
+        android:title="@string/app_studios" />
     <item
         android:id="@+id/menuPerfil"
         android:icon="@drawable/ic_baseline_account_circle_24"
-        android:title="Perfil" />
+        android:title="@string/app_perfil" />
     <item
         android:id="@+id/menuNews"
         android:icon="@drawable/ic_baseline_announcement_24"
-        android:title="Noticias" />
+        android:title="@string/app_noticias" />
     <item
         android:id="@+id/menuMaps"
         android:icon="@drawable/ic_baseline_map_24"
-        android:title="Localizaciones" />
+        android:title="@string/app_localizaciones" />
     <item
         android:id="@+id/menuLogOut"
         android:icon="@drawable/ic_baseline_exit_to_app_24"
-        android:title="Log out" />
+        android:title="@string/app_logout" />
 </menu>

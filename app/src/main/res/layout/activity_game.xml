@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:ems="10"
-        android:hint="Titulo"
+        android:hint="@string/event_titulo"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,7 +25,7 @@
         android:layout_marginTop="16dp"
         android:ems="10"
         android:gravity="start|top"
-        android:hint="Descripción"
+        android:hint="@string/event_desc"
         android:inputType="textMultiLine"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,7 +37,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
-        android:text="Generos:"
+        android:text="@string/game_generos"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="Accion"
+            android:text="@string/game_accion"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -70,7 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="Arcade"
+            android:text="@string/game_arcade"
             app:layout_constraintStart_toEndOf="@+id/chkAccion"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -80,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="Aventura"
+            android:text="@string/game_aventura"
             app:layout_constraintStart_toEndOf="@+id/chkArcade"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -90,7 +90,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="Estrategia"
+            android:text="@string/game_estrategia"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/chkAccion" />
 
@@ -100,7 +100,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="FPS"
+            android:text="@string/game_fps"
             app:layout_constraintStart_toEndOf="@+id/chkEstrategia"
             app:layout_constraintTop_toBottomOf="@+id/chkArcade" />
 
@@ -110,7 +110,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="Gestion"
+            android:text="@string/game_gestion"
             app:layout_constraintStart_toEndOf="@+id/chkFps"
             app:layout_constraintTop_toBottomOf="@+id/chkAventura" />
 
@@ -120,7 +120,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="JRPG"
+            android:text="@string/game_jrpg"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/chkEstrategia" />
 
@@ -130,9 +130,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
+            android:text="@string/game_lucha"
             app:layout_constraintStart_toEndOf="@+id/chkJrpg"
-            app:layout_constraintTop_toBottomOf="@+id/chkFps"
-            tools:text="Lucha" />
+            app:layout_constraintTop_toBottomOf="@+id/chkFps" />
 
         <CheckBox
             android:id="@+id/chkMetroidvania"
@@ -140,7 +140,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="Metroidvania"
+            android:text="@string/game_metroidvania"
             app:layout_constraintStart_toEndOf="@+id/chkLucha"
             app:layout_constraintTop_toBottomOf="@+id/chkGestion" />
 
@@ -150,7 +150,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="Novela Visual"
+            android:text="@string/game_novelavisual"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/chkJrpg" />
 
@@ -160,7 +160,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="Plataformas"
+            android:text="@string/game_plataformas"
             app:layout_constraintStart_toEndOf="@+id/chkNovelaVisual"
             app:layout_constraintTop_toBottomOf="@+id/chkLucha" />
 
@@ -170,7 +170,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="RPG"
+            android:text="@string/game_rpg"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/chkNovelaVisual" />
 
@@ -180,7 +180,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="Shooter"
+            android:text="@string/game_shooter"
             app:layout_constraintStart_toEndOf="@+id/chkRPG"
             app:layout_constraintTop_toBottomOf="@+id/chkPlataformas" />
 
@@ -190,7 +190,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="Survival"
+            android:text="@string/game_survival"
             app:layout_constraintStart_toEndOf="@+id/chkShooter"
             app:layout_constraintTop_toBottomOf="@+id/chkPlataformas" />
 
@@ -200,7 +200,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="Puzzles"
+            android:text="@string/game_puzzles"
             app:layout_constraintStart_toEndOf="@+id/chkPlataformas"
             app:layout_constraintTop_toBottomOf="@+id/chkMetroidvania" />
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -211,7 +211,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:background="@drawable/buttons"
-        android:text="Añadir"
+        android:text="@string/btn_add"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />

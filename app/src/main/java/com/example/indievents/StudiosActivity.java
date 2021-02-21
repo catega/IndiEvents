@@ -156,7 +156,7 @@ public class StudiosActivity extends AppCompatActivity {
         Intent intent = null;
         switch (item.getItemId()){
             case R.id.menuSettings:
-                //intent = new Intent(PerfilActivity.this, EventosActivity.class);
+                intent = new Intent(getBaseContext(), OpcionesActivity.class);
                 break;
         }
 

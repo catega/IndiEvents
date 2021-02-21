@@ -169,7 +169,7 @@ public class PerfilActivity extends AppCompatActivity {
         Intent intent = null;
         switch (item.getItemId()){
             case R.id.menuSettings:
-                intent = new Intent(PerfilActivity.this, EventsActivity.class);
+                intent = new Intent(getBaseContext(), OpcionesActivity.class);
                 break;
         }
 

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">IndiEvents</string>
+    <string name="app_idiomaCambiado">Language changed</string>
+    <!-- Buttons -->
+    <string name="btn_add">Add</string>
+    <string name="btn_join">Join</string>
+    <string name="btn_apuntarse">Join</string>
+    <string name="btn_apuntarS">Join Studio</string>
+    <string name="btn_addEvent">Add Event</string>
+    <string name="btn_addStudio">Add Studio</string>
+    <string name="btn_login">Login</string>
+    <string name="btn_registro">Register</string>
+    <string name="btn_cancelar">Cancel</string>
+    <!-- Menu -->
+    <string name="app_studios">Studios</string>
+    <string name="app_events">Events</string>
+    <string name="app_perfil">Profile</string>
+    <string name="app_settings">Settings</string>
+    <string name="app_noticias">News</string>
+    <string name="app_localizaciones">Locations</string>
+    <string name="app_logout">Log Out</string>
+    <!-- Listas -->
+    <string name="lst_devs">Developers:</string>
+    <string name="lst_games">Games:</string>
+    <string name="lst_events">Events:</string>
+    <string name="lst_eventsC">Events created:</string>
+    <!-- Game -->
+    <string name="game_generos">Generes:</string>
+    <string name="game_accion">Action</string>
+    <string name="game_arcade">Arcade</string>
+    <string name="game_aventura">Adventure</string>
+    <string name="game_estrategia">Strategi</string>
+    <string name="game_fps">FPS</string>
+    <string name="game_gestion">Management</string>
+    <string name="game_jrpg">JRPG</string>
+    <string name="game_lucha">Fight</string>
+    <string name="game_metroidvania">Metroidvania</string>
+    <string name="game_novelavisual">Visual Novel</string>
+    <string name="game_plataformas">Platforms</string>
+    <string name="game_puzzles">Puzzles</string>
+    <string name="game_rpg">RPG</string>
+    <string name="game_shooter">Shooter</string>
+    <string name="game_survival">Survival</string>
+    <!-- User -->
+    <string name="user_nombre">Name</string>
+    <string name="user_usuario">Username</string>
+    <string name="user_email">Email</string>
+    <string name="user_web">Web</string>
+    <string name="user_pass">Password</string>
+    <string name="user_dev">Developer</string>
+    <string name="user_org">Organizer</string>
+    <!-- Eventos -->
+    <string name="event_titulo">Title</string>
+    <string name="event_desc">Description</string>
+    <string name="event_fechaIni">Start Date</string>
+    <string name="event_fechaFin">End Date</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_maps">Map</string>
+</resources>
